@@ -1,0 +1,5 @@
+---
+- name: install useful packages
+  tags: system
+  apt: pkg={{item}} state=latest
+  with_items: packages

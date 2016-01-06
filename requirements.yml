@@ -1,0 +1,3 @@
+- src: devbox.oh-my-zsh
+- src: devbox.chrome
+- src: denkhaus.vagrant

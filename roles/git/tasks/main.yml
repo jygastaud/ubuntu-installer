@@ -1,0 +1,11 @@
+---
+- name: Install repo for latest Git packages
+  tags:
+    - git
+  apt_repository: repo='ppa:git-core/ppa' state=present update_cache=true
+
+
+- name: Install latest Git packages
+  tags:
+    - git
+  apt: pkg=git state=latest

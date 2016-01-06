@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  connection: local
+  sudo: true
+
+#  vars_prompt:
+#      user_name: "what is your name?"
+#      user_email: "what is your email?"
+
+  vars:
+    user: jygastaud
+    packages:
+      - tree
+      - xclip
+      - curl
+      - firefox
+    plugins:
+      - vagrant-hostmanager
+      - vagrant-vbguest
+
+  roles:
+    - { role: system }
+    - { role: git }
+#    - { role: devbox.oh-my-zsh }
+#    - { role: devbox.chrome }
+    - { role: denkhaus.vagrant }
