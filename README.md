@@ -56,7 +56,6 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-sudo-pass
 ## Plan
 
 * Add the following tools ?
- * Sublime text
  * IntelliJ
 * Complete tags for all roles and tools
 * Update README to allow partial installation based on tags
