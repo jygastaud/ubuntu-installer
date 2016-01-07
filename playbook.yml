@@ -21,6 +21,6 @@
   roles:
     - { role: system }
     - { role: git }
-#    - { role: devbox.oh-my-zsh }
-#    - { role: devbox.chrome }
+    - { role: devbox.oh-my-zsh }
+    - { role: devbox.chrome }
     - { role: denkhaus.vagrant }
