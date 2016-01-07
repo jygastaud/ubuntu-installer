@@ -1,0 +1,37 @@
+---
+# System packages
+packages:
+  - tree
+  - xclip
+  - curl
+  - tmux
+  - screen
+
+# Editors
+atom: true
+sublime-text: false
+phpstorm: false
+#intellij: false
+
+# Browsers
+chrome: true
+firefox: true
+
+# Dev-tools
+git: true
+mysql-workbench: false
+vagrant: true
+# Vagrant Plugins
+plugins:
+  - vagrant-hostmanager
+  - vagrant-vbguest
+
+# docker: false
+# otto: false
+
+# Shell
+zsh: false
+
+# Others
+filezilla: false
+xchat: false

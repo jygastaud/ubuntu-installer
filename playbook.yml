@@ -3,27 +3,17 @@
   connection: local
   sudo: true
 
-  vars_prompt:
-    user_name: "what is your name?"
-
-  vars:
-    user: "{{user_name}}"
-    packages:
-      - tree
-      - xclip
-      - curl
-    plugins:
-      - vagrant-hostmanager
-      - vagrant-vbguest
+  vars_files:
+    - config.yml
 
   roles:
     - { role: system }
-    - { role: dev-tools/git }
-    - { role: denkhaus.vagrant, tags: [vagrant, dev-tools] }
-    - { role: devbox.oh-my-zsh, tags: [shell, zsh] }
-    - { role: devbox.chrome, tags: [browser, chrome] }
-    - { role: browsers/firefox }
-    - { role: dev-tools/mysql-workbench }
-    - { role: others/filezilla }
-    - { role: others/xchat }
-    - { role: kosssi.phpstorm, tags: [phpstorm, editor] }
+    - { role: dev-tools/git, when: git }
+    - { role: denkhaus.vagrant, when: vagrant, tags: [vagrant, dev-tools] }
+    - { role: devbox.oh-my-zsh, when: zsh, tags: [shell, zsh] }
+    - { role: devbox.chrome, when: chrome, tags: [browser, chrome] }
+    - { role: browsers/firefox, when: firefox }
+    - { role: dev-tools/mysql-workbench, when: mysql-workbench }
+    - { role: others/filezilla, when: filezilla }
+    - { role: others/xchat, when: xchat }
+    - { role: kosssi.phpstorm, when: phpstorm, tags: [phpstorm, editor] }

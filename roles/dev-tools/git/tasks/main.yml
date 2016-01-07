@@ -5,7 +5,6 @@
     - dev-tools
   apt_repository: repo='ppa:git-core/ppa' state=present update_cache=true
 
-
 - name: Install latest Git packages
   tags:
     - git
