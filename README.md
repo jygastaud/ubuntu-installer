@@ -3,9 +3,13 @@
 Easily configure your ubuntu installation.
 
 * Virtualbox
-* Vagrant (with the landrush plugin)
+* Vagrant - with the following plugins
+  * vagrant-hostmanager
+  * vagrant-vbguest 
 * Zsh & Oh-My-Zsh
 * Git
+* Firefox
+* Chrome
 
 ## Quick start
 
