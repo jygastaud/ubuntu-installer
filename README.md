@@ -11,7 +11,7 @@ Easily configure your ubuntu installation.
 
 ### Requirements
 
-In order to run this script you need to have access to a shell, unzip and wget and ansible.
+In order to run this script you need to have access to a shell, unzip and wget.
 
 ### Installation
 
