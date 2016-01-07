@@ -1,5 +1,7 @@
 # ubuntu-installer
 
+## WARNING NEED TESTS
+
 Easily configure your ubuntu installation.
 
 * Dev tools
@@ -55,7 +57,6 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-sudo-pass
 
 * Add the following tools ?
  * Sublime text
- * PHPStorm
  * IntelliJ
-* Add tags for all roles and tools
+* Complete tags for all roles and tools
 * Update README to allow partial installation based on tags

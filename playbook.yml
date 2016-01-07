@@ -12,18 +12,18 @@
       - tree
       - xclip
       - curl
-      - firefox
-      - mysql-workbench
-      - xchat
-      - filezilla
-      - atom
     plugins:
       - vagrant-hostmanager
       - vagrant-vbguest
 
   roles:
     - { role: system }
-    - { role: git }
-    - { role: devbox.oh-my-zsh }
-    - { role: devbox.chrome }
-    - { role: denkhaus.vagrant }
+    - { role: dev-tools/git }
+    - { role: denkhaus.vagrant, tags: [vagrant, dev-tools] }
+    - { role: devbox.oh-my-zsh, tags: [shell, zsh] }
+    - { role: devbox.chrome, tags: [browser, chrome] }
+    - { role: browsers/firefox }
+    - { role: dev-tools/mysql-workbench }
+    - { role: others/filezilla }
+    - { role: others/xchat }
+    - { role: kosssi.phpstorm, tags: [phpstorm, editor] }

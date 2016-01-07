@@ -1,0 +1,7 @@
+---
+- name: install XChat IRC
+  tags:
+    - xchat
+    - other
+    - utils
+  apt: pkg=xchat state=latest

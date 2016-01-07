@@ -1,0 +1,7 @@
+---
+- name: install mysql-workbench
+  tags:
+    - mysql-workbench
+    - dev-tools
+    - mysql
+  apt: pkg=mysql-workbench state=latest

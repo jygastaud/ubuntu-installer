@@ -2,10 +2,12 @@
 - name: Install repo for latest Git packages
   tags:
     - git
+    - dev-tools
   apt_repository: repo='ppa:git-core/ppa' state=present update_cache=true
 
 
 - name: Install latest Git packages
   tags:
     - git
+    - dev-tools
   apt: pkg=git state=latest
