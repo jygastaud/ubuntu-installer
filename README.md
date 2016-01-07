@@ -41,3 +41,12 @@ cd installer
 ansible-galaxy install -r requirements.yml
 ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-sudo-pass
 ```
+
+## Plan
+
+### Add the following tools
+
+* Atom and/or Sublime text
+* MySQL Workbench
+* XChat IRC
+* FileZilla
