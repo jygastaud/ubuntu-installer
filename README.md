@@ -2,14 +2,23 @@
 
 Easily configure your ubuntu installation.
 
-* Virtualbox
-* Vagrant - with the following plugins
-  * vagrant-hostmanager
-  * vagrant-vbguest 
-* Zsh & Oh-My-Zsh
-* Git
-* Firefox
-* Chrome
+* Dev tools
+  * Git
+  * MySQL Workbench
+  * Vagrant - with the following plugins
+    * vagrant-hostmanager
+    * vagrant-vbguest
+  * Virtualbox
+* Browsers
+  * Chrome
+  * Firefox
+* Shell
+  * Zsh & Oh-My-Zsh
+* Editor / IDE
+  * Atom
+* Others
+  * FileZilla
+  * XChat IRC
 
 ## Quick start
 
@@ -44,10 +53,9 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-sudo-pass
 
 ## Plan
 
-* Add the following tools
- * Atom and/or Sublime text
- * MySQL Workbench
- * XChat IRC
- * FileZilla
-* Add tags for all roles
+* Add the following tools ?
+ * Sublime text
+ * PHPStorm
+ * IntelliJ
+* Add tags for all roles and tools
 * Update README to allow partial installation based on tags
