@@ -50,4 +50,4 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-sudo-pass
  * XChat IRC
  * FileZilla
 * Add tags for all roles
-* Detailled README to allow partial installation based on tags
+* Update README to allow partial installation based on tags
