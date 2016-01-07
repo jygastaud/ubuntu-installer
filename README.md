@@ -13,6 +13,8 @@ Easily configure your ubuntu installation.
 
 In order to run this script you need to have access to a shell, unzip and wget and ansible.
 
+### Installation
+
 ```
 wget -O installer.zip https://github.com/jygastaud/ubuntu-installer/archive/master.zip
 unzip installer
@@ -25,6 +27,8 @@ cd installer
 ### Requirements
 
 In order to run this script you need to have access to a shell, unzip and wget and ansible.
+
+### Installation
 
 ```
 wget -O installer.zip https://github.com/jygastaud/ubuntu-installer/archive/master.zip
