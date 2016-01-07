@@ -44,9 +44,10 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-sudo-pass
 
 ## Plan
 
-### Add the following tools
-
-* Atom and/or Sublime text
-* MySQL Workbench
-* XChat IRC
-* FileZilla
+* Add the following tools
+ * Atom and/or Sublime text
+ * MySQL Workbench
+ * XChat IRC
+ * FileZilla
+* Add tags for all roles
+* Detailled README to allow partial installation based on tags
