@@ -13,6 +13,7 @@
       - xclip
       - curl
       - firefox
+      - mysql-workbench
     plugins:
       - vagrant-hostmanager
       - vagrant-vbguest
