@@ -1,7 +1,0 @@
----
-- name: install sublime-text
-  tags:
-    - sublime
-    - editor
-    - dev-tools
-  apt: pkg=sublime-text state=latest

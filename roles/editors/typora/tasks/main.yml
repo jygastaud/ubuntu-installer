@@ -1,0 +1,18 @@
+---
+- name: Add Apt signing key,for Typora
+  apt_key:
+    url: https://typora.io/linux/public-key.asc
+    state: present
+
+- name: Install repo for latest Typora packages
+  apt_repository:
+    repo: 'deb https://typora.io/linux ./'
+    state: present
+    update_cache: yes
+
+- name: install Typora
+  tags:
+    - typora
+    - editor
+    - markdown
+  apt: pkg=typora state=latest

@@ -1,0 +1,8 @@
+---
+- name: Install tmuxinator
+  tags:
+    - tmuxinator
+    - dev-tools
+  gem:
+    name: tmuxinator
+    state: latest

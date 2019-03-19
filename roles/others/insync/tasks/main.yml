@@ -1,0 +1,19 @@
+---
+- name: Add Apt signing key for insync
+  apt_key:
+    id: ACCAF35C
+    keyserver: keyserver.ubuntu.com
+    state: present
+
+- name: Install repo for latest insync packages
+  apt_repository:
+    repo: 'deb http://apt.insynchq.com/ubuntu bionic non-free contrib'
+    state: present
+    update_cache: yes
+
+- name: install insync
+  tags:
+    - insync
+    - drive
+    - sync
+  apt: pkg=insync state=latest

@@ -1,5 +1,17 @@
 ---
-- name: install useful packages
+- name: Install packages with snaps
+  snap:
+    name: "{{ item.name }}"
+    classic: "{{ item.classic | default(omit) }}"
+  loop: "{{ packages|flatten(levels=1) }}"
+  when: 
+    - item.install | default(False)
+    - item.install_with == 'snap'
+
+- name: install packages with APT
   tags: system
-  apt: pkg={{item}} state=latest
-  with_items: "{{ packages }}"
+  apt: pkg={{ item.name }} state=latest update_cache=yes
+  loop: "{{ packages|flatten(levels=1) }}"
+  when: 
+    - item.install | default(False)
+    - item.install_with == 'apt'

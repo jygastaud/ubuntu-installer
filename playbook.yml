@@ -1,19 +1,99 @@
 ---
 - hosts: localhost
   connection: local
-  sudo: true
+  sudo: yes
 
   vars_files:
-    - config.yml
-
+    - "config.yml"
+  
   roles:
-    - { role: system }
-    - { role: dev-tools/git, when: git }
-    - { role: denkhaus.vagrant, when: vagrant, tags: [vagrant, dev-tools] }
-    - { role: devbox.oh-my-zsh, when: zsh, tags: [shell, zsh] }
-    - { role: devbox.chrome, when: chrome, tags: [browser, chrome] }
-    - { role: browsers/firefox, when: firefox }
-    - { role: dev-tools/mysql-workbench, when: mysql-workbench }
-    - { role: others/filezilla, when: filezilla }
-    - { role: others/xchat, when: xchat }
-    - { role: kosssi.phpstorm, when: phpstorm, tags: [phpstorm, editor] }
+    - { role: system, tags: [packages] }
+    - { role: dev-tools/git, when: git, tags: [git, dev-tools] }
+    - { role: oefenweb.virtualbox, when: virtualbox, tags: [virtualbox, dev-tools] }
+    - { role: oefenweb.vagrant, when: vagrant, tags: [vagrant, dev-tools] }
+    - { role: gantsign.oh-my-zsh, when: zsh, tags: [shell, zsh] }
+    - { role: oefenweb.chrome, when: chrome, tags: [browser, chrome] }
+    - { role: geerlingguy.docker, when: docker, tags: [docker, dev-tools] }
+    - { role: dev-tools/tmuxinator, when: tmuxinator, tags: [tmuxinator, dev-tools] }
+    - { role: aeimer.install_bat, when: bat, tags: [bat, dev-tools] }
+    - { role: dev-tools/mysql-workbench, when: mysql_workbench }
+    - { role: jaredhocutt.franz, when: franz, tags: [franz, messaging] }
+    - { role: editors/typora, when: typora, tags: [typora, editor, markdown] }
+    - { role: dev-tools/pet, when: pet_cli, tags: [pet, editor, markdown] }
+    - { role: dev-tools/openshift_client, when: openshift_client, tags: [openshift_client] }
+    - { role: others/insync, when: insync, tags: [insync, drive] }
+
+  post_tasks:
+    - name: Update .zshrc
+      block:
+        - name: Add autocompletion to zsh
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - tmuxinator #"
+            content: |
+              source $HOME/.bin/tmuxinator.zsh
+              {{ tmuxinator_alias }}
+          when: tmuxinator and update_shell_sources
+      
+        - name: Add autocompletion to zsh
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump_alias #"
+            content: |
+              source /usr/share/autojump/autojump.sh
+          when: autojump_alias and update_shell_sources
+
+        - name: Add custom aliases
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - custom_aliases #"
+            content: |
+              {{ custom_aliases }}
+          when: custom_aliases and update_aliases
+      when: zsh
+
+    - name: Update .bashrc
+      block:
+        - name: Add autocompletion to bash
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.bashrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - tmuxinator #"
+            content: |
+              source $HOME/.bin/tmuxinator.bash
+          when: tmuxinator and update_shell_sources
+
+        - name: Add autocompletion to bash
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.bashrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump_alias #"
+            content: |
+              source /usr/share/autojump/autojump.sh
+          when: autojump_alias and update_shell_sources
+
+        - name: Add custom aliases
+          become: no
+          blockinfile:
+            create: yes
+            path: "{{ lookup('env','HOME') }}/.bash_aliases"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - custom_aliases #"
+            content: |
+              {{ custom_aliases }}
+          when: custom_aliases and update_aliases
+      when: not zsh
+
+    - name: Create / Update gitconfig files
+      become: no
+      tags: [gitconfig]
+      blockinfile:
+        create: yes
+        path: "{{ lookup('env','HOME') }}/{{ item.name }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - {{ item.name }} #"
+        content: |
+          {{ item.value }}
+      loop: "{{ gitconfig|flatten(levels=1) }}"
+      when: update_gitconfig

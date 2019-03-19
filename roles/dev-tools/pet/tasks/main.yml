@@ -1,0 +1,4 @@
+---
+- name: Install pet .deb package from the internet.
+  apt:
+    deb: https://github.com/knqyf263/pet/releases/download/v{{ pet_version }}/pet_{{ pet_version }}_linux_amd64.deb

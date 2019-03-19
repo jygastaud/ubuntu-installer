@@ -1,7 +1,0 @@
----
-- name: install atom
-  tags:
-    - atom
-    - editor
-    - dev-tools
-  apt: pkg=atom state=latest

@@ -1,7 +1,0 @@
----
-- name: install FileZilla
-  tags:
-    - filezilla
-    - other
-    - utils
-  apt: pkg=filezilla state=latest

@@ -1,4 +1,7 @@
-- src: devbox.oh-my-zsh
-- src: devbox.chrome
-- src: denkhaus.vagrant
-- src: kosssi.phpstorm
+- src: gantsign.oh-my-zsh
+- src: oefenweb.chrome
+- src: oefenweb.virtualbox
+- src: oefenweb.vagrant
+- src: geerlingguy.docker
+- src: aeimer.install_bat
+- src: jaredhocutt.franz

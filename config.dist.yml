@@ -1,0 +1,224 @@
+---
+# System packages
+packages:
+  ## CLI ##
+  - name: autojump
+    install: no
+    install_with: apt
+
+  - name: curl
+    install: yes
+    install_with: apt
+
+  - name: direnv
+    install: no
+    install_with: snap
+
+  - name: htop
+    install: yes
+    install_with: snap
+
+  # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
+  - name: http
+    install: no
+    install_with: snap
+
+  # [JQ - Json Processor](https://github.com/stedolan/jq)
+  - name: jq
+    install: no
+    install_with: snap
+
+  - name: mosh
+    install: no
+    install_with: apt
+
+  # [Peco - Interactive filtering tool](https://github.com/peco/peco)
+  - name: peco
+    install: yes
+    install_with: snap
+
+  # [Rclone - sync files and directories](https://rclone.org/)
+  - name: rclone
+    classic: no
+    install: no
+    install_with: snap
+
+  - name: ruby
+    classic: yes
+    install: no
+    install_with: snap
+
+  - name: syncthing
+    install: no
+    install_with: snap
+
+  - name: tmux
+    install: yes
+    install_with: apt
+
+  - name: tmuxinator
+    install: no
+    install_with: apt
+
+  - name: tree
+    install: yes
+    install_with: snap
+
+  # [YQ - Yaml Processor](https://github.com/mikefarah/yq)
+  - name: yq
+    install: no
+    install_with: snap
+
+  ### APPS ###
+  ## Editors ##
+
+  # Atom
+  - name: atom
+    classic: yes
+    install: no
+    install_with: snap
+
+  # PHPStorm
+  - name: phpstorm
+    classic: yes
+    install: no
+    install_with: snap
+
+  # Sublime Text
+  - name: sublime-text
+    classic: no
+    install_with: snap
+
+  # Visual Studio Code
+  - name: vscode
+    classic: yes
+    install: no
+    install_with: snap
+
+  ## Others ##
+  - name: filezilla
+    install: no
+    install_with: apt
+
+  # [Postman](https://www.getpostman.com/)
+  - name: postman
+    install: yes
+    install_with: snap
+
+  ## Cloud / Kubernetes Related
+  - name: aws-cli
+    classic: yes
+    install: no
+    install_with: snap
+
+  - name: kubectl
+    classic: yes  
+    install: no
+    install_with: snap
+
+# [Typora - Markdown Editor](https://typora.io/#linux)
+typora: yes
+
+# Add aliases / autocomplete
+update_aliases: yes
+autojump_alias: yes
+tmuxinator_alias: |
+  alias mux=tmuxinator
+
+custom_aliases: |
+  alias d=docker
+  alias vup='vagrant up'
+  alias vstop='vagrant halt'
+  alias cat=bat
+  alias k=kubectl
+
+# Update source files in bashrc/zshrc
+update_shell_sources: yes
+
+# Browsers
+chrome: yes
+
+# Messaging tools
+# [Meet Franz](https://meetfranz.com/)
+franz: yes
+
+# [Insync - Drive for Linux](https://www.insynchq.com)
+insync: yes
+
+######## Virtualisation / Containers / Kubernetes ########
+# Docker
+docker: yes
+docker_compose_version: "1.23.2"
+docker_users:
+  - jyg
+
+# Download Openshift Client (oc)
+openshift_client: yes
+
+# Vagrant + Virtualbox
+vagrant: yes
+virtualbox: yes
+
+######## CLI tools ########
+git: yes
+update_gitconfig: yes
+# Example
+# gitconfig:
+#   # The name of the file that need to be created or updated
+#   - name: ".gitconfig"
+#     # Content of the file
+#     value: |
+#       [user]
+#         name = My Name
+#         email = my@email.com
+
+#       [alias]
+#         amend = commit --amend
+#         st = status
+#         co = checkout
+#         hist = log --pretty=oneline --abbrev-commit --graph --decorate --date=short
+
+#       [includeIf "gitdir:~/workspace/divers/"]
+#         path = ~/.gitconfig-perso
+
+#   - name: ".gitconfig-perso"
+#     value: |
+#       [user]
+#         email = myother@email.com
+      
+#       [core]
+#         editor = "code -w"
+gitconfig: []
+
+# [Cat clone](https://github.com/sharkdp/bat)
+bat: yes
+
+# [Tmuxinator - Tmux Sessions Manager](https://github.com/tmuxinator/tmuxinator)
+tmuxinator: no
+
+# [PET - snippet manager](https://github.com/knqyf263/pet)
+pet_cli: yes
+
+# Shell
+zsh: no
+
+# Oh-My-ZSH
+# # Default theme
+# oh_my_zsh_theme: robbyrussell
+
+# # Default plugins
+# oh_my_zsh_plugins:
+#   - git
+
+# # User configuration
+# # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
+# users:
+#   - username: example1
+#     oh_my_zsh:
+#       theme: robbyrussell
+#       plugins:
+#         - git
+
+######## Others ########
+mysql_workbench: no
+filezilla: no
