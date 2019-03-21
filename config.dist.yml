@@ -102,7 +102,7 @@ packages:
 
   # [Postman](https://www.getpostman.com/)
   - name: postman
-    install: yes
+    install: no
     install_with: snap
 
   ## Cloud / Kubernetes Related
@@ -120,48 +120,53 @@ packages:
 typora: yes
 
 # Add aliases / autocomplete
-update_aliases: yes
-autojump_alias: yes
-tmuxinator_alias: |
-  alias mux=tmuxinator
+update_aliases: no
+# Example
+# tmuxinator_alias: |
+#   alias mux=tmuxinator
+tmuxinator_alias: ""
 
-custom_aliases: |
-  alias d=docker
-  alias vup='vagrant up'
-  alias vstop='vagrant halt'
-  alias cat=bat
-  alias k=kubectl
+# Add alias / source for autojump
+autojump_alias: no
+
+# Example
+# custom_aliases: |
+#   alias d=docker
+#   alias vup='vagrant up'
+#   alias vstop='vagrant halt'
+#   alias cat=bat
+#   alias k=kubectl
+custom_aliases: ""
 
 # Update source files in bashrc/zshrc
-update_shell_sources: yes
+update_shell_sources: no
 
 # Browsers
-chrome: yes
+chrome: no
 
 # Messaging tools
 # [Meet Franz](https://meetfranz.com/)
-franz: yes
+franz: no
 
 # [Insync - Drive for Linux](https://www.insynchq.com)
-insync: yes
+insync: no
 
 ######## Virtualisation / Containers / Kubernetes ########
 # Docker
 docker: yes
 docker_compose_version: "1.23.2"
-docker_users:
-  - jyg
+docker_users: []
 
 # Download Openshift Client (oc)
-openshift_client: yes
+openshift_client: no
 
 # Vagrant + Virtualbox
-vagrant: yes
-virtualbox: yes
+vagrant: no
+virtualbox: no
 
 ######## CLI tools ########
 git: yes
-update_gitconfig: yes
+update_gitconfig: no
 # Example
 # gitconfig:
 #   # The name of the file that need to be created or updated
@@ -197,7 +202,7 @@ bat: yes
 tmuxinator: no
 
 # [PET - snippet manager](https://github.com/knqyf263/pet)
-pet_cli: yes
+pet_cli: no
 
 # Shell
 zsh: no

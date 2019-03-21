@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   connection: local
-  sudo: yes
+  become: yes
 
   vars_files:
     - "config.yml"
@@ -11,7 +11,7 @@
     - { role: dev-tools/git, when: git, tags: [git, dev-tools] }
     - { role: oefenweb.virtualbox, when: virtualbox, tags: [virtualbox, dev-tools] }
     - { role: oefenweb.vagrant, when: vagrant, tags: [vagrant, dev-tools] }
-    - { role: gantsign.oh-my-zsh, when: zsh, tags: [shell, zsh] }
+    #- { role: gantsign.oh-my-zsh, when: zsh, tags: [shell, zsh] }
     - { role: oefenweb.chrome, when: chrome, tags: [browser, chrome] }
     - { role: geerlingguy.docker, when: docker, tags: [docker, dev-tools] }
     - { role: dev-tools/tmuxinator, when: tmuxinator, tags: [tmuxinator, dev-tools] }
@@ -19,8 +19,8 @@
     - { role: dev-tools/mysql-workbench, when: mysql_workbench }
     - { role: jaredhocutt.franz, when: franz, tags: [franz, messaging] }
     - { role: editors/typora, when: typora, tags: [typora, editor, markdown] }
-    - { role: dev-tools/pet, when: pet_cli, tags: [pet, editor, markdown] }
-    - { role: dev-tools/openshift_client, when: openshift_client, tags: [openshift_client] }
+    - { role: dev-tools/pet, when: pet_cli, tags: [dev-tools] }
+    - { role: dev-tools/openshift_client, when: openshift_client, tags: [openshift_client, k8s, cloud] }
     - { role: others/insync, when: insync, tags: [insync, drive] }
 
   post_tasks:

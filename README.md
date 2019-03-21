@@ -28,9 +28,11 @@ pip install git+https://github.com/ansible/ansible.git@devel
     * mosh
     * ✔ peco
     * postman
+    * rclone
     * ruby
     * syncthing
     * ✔ tmux
+    * tmuxinator (/!\ need tests /!\)
     * ✔ tree
     * yq
 
@@ -41,16 +43,15 @@ pip install git+https://github.com/ansible/ansible.git@devel
   * MySQL Workbench
   * Virtualbox
   * Vagrant
-  * tmuxinator (not working)
   * kubectl
   * openshift client (oc)
   * aws-cli
 
 * Browsers
-  * ✔ Chrome (via snap package)
+  * Chrome (via snap package)
 
 * Shell
-  * Zsh & Oh-My-Zsh
+  * Zsh & Oh-My-Zsh (/!\ need tests /!\)
 
 * Editor / IDE
   * Atom (via snap)
@@ -108,8 +109,38 @@ ansible-galaxy install -r requirements.yml
 ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass
 ```
 
+## Specific component installation
+
+You can use Ansible tag to run only some part of that playbook.
+
+Examples:
+
+* Install only packages
+
+```
+ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag packages
+```
+
+* Install only git
+
+```
+ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag git
+```
+
+* Install only packages
+
+```
+ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag packages
+```
+
+* Install all `dev-tools`
+
+```
+ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag dev-tools
+```
+
 ## Plan
 
 * Add the following tools
   * Others? Create an issue!
-* Update README and `run.sh` to allow partial installation
+* Update `run.sh` to allow partial installation
