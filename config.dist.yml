@@ -1,142 +1,8 @@
 ---
-# System packages
-packages:
-  ## CLI ##
-  - name: autojump
-    install: no
-    install_with: apt
-
-  - name: curl
-    install: yes
-    install_with: apt
-
-  - name: direnv
-    install: no
-    install_with: snap
-
-  - name: htop
-    install: yes
-    install_with: snap
-
-  # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
-  - name: http
-    install: no
-    install_with: snap
-
-  # [JQ - Json Processor](https://github.com/stedolan/jq)
-  - name: jq
-    install: no
-    install_with: snap
-
-  - name: mosh
-    install: no
-    install_with: apt
-
-  # [Peco - Interactive filtering tool](https://github.com/peco/peco)
-  - name: peco
-    install: yes
-    install_with: snap
-
-  # [Rclone - sync files and directories](https://rclone.org/)
-  - name: rclone
-    classic: no
-    install: no
-    install_with: snap
-
-  - name: ruby
-    classic: yes
-    install: no
-    install_with: snap
-
-  - name: syncthing
-    install: no
-    install_with: snap
-
-  - name: tmux
-    install: yes
-    install_with: apt
-
-  - name: tmuxinator
-    install: no
-    install_with: apt
-
-  - name: tree
-    install: yes
-    install_with: snap
-
-  # [YQ - Yaml Processor](https://github.com/mikefarah/yq)
-  - name: yq
-    install: no
-    install_with: snap
-
-  ### APPS ###
-  ## Editors ##
-
-  # Atom
-  - name: atom
-    classic: yes
-    install: no
-    install_with: snap
-
-  # PHPStorm
-  - name: phpstorm
-    classic: yes
-    install: no
-    install_with: snap
-
-  # Sublime Text
-  - name: sublime-text
-    classic: no
-    install_with: snap
-
-  # Visual Studio Code
-  - name: vscode
-    classic: yes
-    install: no
-    install_with: snap
-
-  ## Others ##
-  - name: filezilla
-    install: no
-    install_with: apt
-
-  # [Postman](https://www.getpostman.com/)
-  - name: postman
-    install: no
-    install_with: snap
-
-  ## Cloud / Kubernetes Related
-  - name: aws-cli
-    classic: yes
-    install: no
-    install_with: snap
-
-  - name: kubectl
-    classic: yes  
-    install: no
-    install_with: snap
-
-# [Typora - Markdown Editor](https://typora.io/#linux)
-typora: yes
 
 # Add aliases / autocomplete
 update_aliases: no
-# Example
-# tmuxinator_alias: |
-#   alias mux=tmuxinator
-tmuxinator_alias: ""
 
-# Add alias / source for autojump
-autojump_alias: no
-
-# Example
-# custom_aliases: |
-#   alias d=docker
-#   alias vup='vagrant up'
-#   alias vstop='vagrant halt'
-#   alias cat=bat
-#   alias k=kubectl
-custom_aliases: ""
 
 # Update source files in bashrc/zshrc
 update_shell_sources: no
@@ -167,33 +33,7 @@ virtualbox: no
 ######## CLI tools ########
 git: yes
 update_gitconfig: no
-# Example
-# gitconfig:
-#   # The name of the file that need to be created or updated
-#   - name: ".gitconfig"
-#     # Content of the file
-#     value: |
-#       [user]
-#         name = My Name
-#         email = my@email.com
 
-#       [alias]
-#         amend = commit --amend
-#         st = status
-#         co = checkout
-#         hist = log --pretty=oneline --abbrev-commit --graph --decorate --date=short
-
-#       [includeIf "gitdir:~/workspace/divers/"]
-#         path = ~/.gitconfig-perso
-
-#   - name: ".gitconfig-perso"
-#     value: |
-#       [user]
-#         email = myother@email.com
-      
-#       [core]
-#         editor = "code -w"
-gitconfig: []
 
 # [Cat clone](https://github.com/sharkdp/bat)
 bat: yes
@@ -227,3 +67,314 @@ zsh: no
 ######## Others ########
 mysql_workbench: no
 filezilla: no
+
+---
+#### ╔═╗╔╗╔╔═╗╔╗ ╦  ╔═╗  ╔╦╗╦ ╦╔═╗  ╔╦╗╔═╗╔═╗╦  ╔═╗ ####
+#### ║╣ ║║║╠═╣╠╩╗║  ║╣    ║ ╠═╣║╣    ║ ║ ║║ ║║  ╚═╗ ####
+#### ╚═╝╝╚╝╩ ╩╚═╝╩═╝╚═╝   ╩ ╩ ╩╚═╝   ╩ ╚═╝╚═╝╩═╝╚═╝ ####
+#### ╦ ╦╔═╗╦ ╦  ╔╗╔╔═╗╔═╗╔╦╗                        ####
+#### ╚╦╝║ ║║ ║  ║║║║╣ ║╣  ║║                        ####
+####  ╩ ╚═╝╚═╝  ╝╚╝╚═╝╚═╝═╩╝                        ####
+
+# ╔═╗╦  ╦
+# ║  ║  ║
+# ╚═╝╩═╝╩
+
+  # ╔╦╗┬ ┬┌─┐┌┬┐  ┬ ┬┌─┐┬  ┬┌─┐    ╔═╗┬  ┌─┐┌─┐┌─┐┬┌─┐
+  # ║║║│ │└─┐ │   ├─┤├─┤└┐┌┘├┤     ║  │  ├─┤└─┐└─┐││  
+  # ╩ ╩└─┘└─┘ ┴   ┴ ┴┴ ┴ └┘ └─┘    ╚═╝┴─┘┴ ┴└─┘└─┘┴└─┘
+
+curl: yes
+git: yes
+htop: yes
+tmux: yes
+tree: yes
+
+  # ┌─┐┬┌┬┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌─┐┬─┐┌─┐┌┬┐┬ ┬┌─┐┌┬┐┬┬  ┬┬┌┬┐┬ ┬
+  # ├─┘││││├─┘  └┬┘│ ││ │├┬┘  ├─┘├┬┘│ │ │││ ││   │ │└┐┌┘│ │ └┬┘
+  # ┴  ┴┴ ┴┴     ┴ └─┘└─┘┴└─  ┴  ┴└─└─┘─┴┘└─┘└─┘ ┴ ┴ └┘ ┴ ┴  ┴ 
+
+# [asciinema - Record terminal sesions](https://asciinema.org/)
+asciinema: yes
+# [autojump - better cd](https://github.com/wting/autojump)
+autojump: yes
+# [Cat clone](https://github.com/sharkdp/bat)
+bat: yes
+# [direnv - Easy management of local environment variables](https://direnv.net/)
+direnv: yes
+# [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
+httpie: yes 
+# [JQ - Json Processor](https://github.com/stedolan/jq)
+jq: yes
+# [Mosh - Mobile Shell](https://mosh.org/)
+mosh: yes
+# [Peco - Interactive filtering tool](https://github.com/peco/peco)
+peco: yes
+# [PET - snippet manager](https://github.com/knqyf263/pet)
+pet_cli: yes
+# [Rclone - sync files and directories](https://rclone.org/)
+rclone: yes
+ruby: no
+syncthing: no
+# [Tmuxinator - Tmux Sessions Manager](https://github.com/tmuxinator/tmuxinator)
+tmuxinator: no
+# [YQ - Yaml Processor](https://github.com/mikefarah/yq)
+yq: yes
+
+##### DOTFILES MANAGER #####
+# [Chezmoi - dotfiles manager](https://github.com/twpayne/chezmoi)
+chezmoi: yes
+
+##### PASSWORD MANAGERS #####
+# [LastPass CLI]()
+lastpass_cli: yes
+# [Bitwarden Desktop]()
+bitwarden: no
+# [Bitwarden CLI]()
+bitwarden_cli: yes
+
+##### EDITORS #####
+atom: no
+phpstorm: yes
+sublime: no
+vscode: yes
+
+##### BROWSERS #####
+chrome: yes
+
+##### MESSAGING #####
+# [Meet Franz](https://meetfranz.com/)
+franz: yes
+
+##### Virtualisation / Containers / Kubernetes #####
+# Docker
+docker: yes
+docker_users:
+  - "{{ ansible_ssh_user }}"
+
+aws_cli: no
+kubectl: yes
+
+# Download Openshift Client (oc)
+openshift_client: yes
+
+# Vagrant + Virtualbox
+vagrant: yes
+virtualbox: yes
+
+##### OTHER APPS #####
+# [Insync - Drive for Linux](https://www.insynchq.com)
+insync: yes
+mysql_workbench: no
+filezilla: no
+# [Postman](https://www.getpostman.com/)
+postman: yes
+# [Typora - Markdown Editor](https://typora.io/#linux)
+typora: yes
+
+##### SHELL CONFIGS #####
+zsh: no
+
+##### Shell Aliases #####
+update_aliases: yes
+
+# Example
+# custom_aliases: |
+#   alias d=docker
+#   alias vup='vagrant up'
+#   alias vstop='vagrant halt'
+#   alias cat=bat
+#   alias k=kubectl
+custom_aliases: ""
+
+##### SOURCED FILES #####
+# Update source files in bashrc/zshrc
+update_shell_sources: yes
+
+##### Git CONFIG #####
+
+update_gitconfig: yes
+# Example
+# gitconfig:
+#   # The name of the file that need to be created or updated
+#   - name: ".gitconfig"
+#     # Content of the file
+#     value: |
+#       [user]
+#         name = My Name
+#         email = my@email.com
+
+#       [alias]
+#         amend = commit --amend
+#         st = status
+#         co = checkout
+#         hist = log --pretty=oneline --abbrev-commit --graph --decorate --date=short
+
+#       [includeIf "gitdir:~/workspace/divers/"]
+#         path = ~/.gitconfig-perso
+
+#   - name: ".gitconfig-perso"
+#     value: |
+#       [user]
+#         email = myother@email.com
+      
+#       [core]
+#         editor = "code -w"
+gitconfig: []
+
+
+##### Oh-My-ZSH CONFIG #####
+
+# # Default theme
+# oh_my_zsh_theme: robbyrussell
+
+# # Default plugins
+# oh_my_zsh_plugins:
+#   - git
+
+# # User configuration
+# # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
+# users:
+#   - username: example1
+#     oh_my_zsh:
+#       theme: robbyrussell
+#       plugins:
+#         - git
+#          - golang
+#          - kubectl
+
+
+#### ╔╦╗╔═╗  ╔╗╔╔═╗╔╦╗  ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦ ╦╔╗╔╦  ╔═╗╔═╗╔═╗  ####
+####  ║║║ ║  ║║║║ ║ ║   ║  ╠═╣╠═╣║║║║ ╦║╣   ║ ║║║║║  ║╣ ╚═╗╚═╗  ####
+#### ═╩╝╚═╝  ╝╚╝╚═╝ ╩   ╚═╝╩ ╩╩ ╩╝╚╝╚═╝╚═╝  ╚═╝╝╚╝╩═╝╚═╝╚═╝╚═╝  ####
+#### ╦ ╦╔═╗╦ ╦  ╦╔═╔╗╔╔═╗╦ ╦  ╦ ╦╦ ╦╔═╗╔╦╗  ╦ ╦╔═╗╦ ╦  ╔╦╗╔═╗   ####
+#### ╚╦╝║ ║║ ║  ╠╩╗║║║║ ║║║║  ║║║╠═╣╠═╣ ║   ╚╦╝║ ║║ ║   ║║║ ║   ####
+####  ╩ ╚═╝╚═╝  ╩ ╩╝╚╝╚═╝╚╩╝  ╚╩╝╩ ╩╩ ╩ ╩    ╩ ╚═╝╚═╝  ═╩╝╚═╝   ####
+
+# System packages
+packages:
+  ## CLI ##
+  - name: asciinema
+    classic: yes
+    install: "{{ asciinema }}"
+    install_with: snap
+
+  - name: autojump
+    install: "{{ autojump }}"
+    install_with: apt
+
+  - name: curl
+    install: "{{ curl }}"
+    install_with: apt
+
+  - name: direnv
+    install: "{{ direnv }}"
+    install_with: snap
+
+  - name: htop
+    install: "{{ htop }}"
+    install_with: snap
+
+  - name: http
+    install: "{{ httpie }}"
+    install_with: snap
+
+  - name: jq
+    install: "{{ jq }}"
+    install_with: snap
+
+  - name: mosh
+    install: "{{ mosh }}"
+    install_with: apt
+
+  - name: peco
+    install: yes
+    install_with: snap
+
+  - name: rclone
+    classic: no
+    install: "{{ rclone }}"
+    install_with: snap
+
+  - name: ruby
+    classic: yes
+    install: "{{ ruby }}"
+    install_with: snap
+
+  - name: syncthing
+    install: "{{ syncthing }}"
+    install_with: snap
+
+  - name: tmux
+    install: "{{ tmux }}"
+    install_with: apt
+
+  - name: tmuxinator
+    install: "{{ tmuxinator }}"
+    install_with: apt
+
+  - name: tree
+    install: "{{ tree }}"
+    install_with: snap
+
+  - name: yq
+    install: "{{ tree }}"
+    install_with: snap
+
+  ## Editors ##
+  # Atom
+  - name: atom
+    classic: yes
+    install: "{{ atom }}"
+    install_with: snap
+
+  # PHPStorm
+  - name: phpstorm
+    classic: yes
+    install: "{{ phpstorm }}"
+    install_with: snap
+
+  # Sublime Text
+  - name: sublime-text
+    classic: "{{ sublime }}"
+    install_with: snap
+
+  # Visual Studio Code
+  - name: vscode
+    classic: yes
+    install: "{{ vscode }}"
+    install_with: snap
+
+  ## Others ##
+  - name: postman
+    install: "{{ postman }}"
+    install_with: snap
+
+  ## Cloud / Kubernetes Related
+  - name: aws-cli
+    classic: yes
+    install: "{{ aws_cli }}"
+    install_with: snap
+
+  - name: kubectl
+    classic: yes  
+    install: "{{ kubectl }}"
+    install_with: snap
+
+  ### PASSWORD MANAGERS ###
+  - name: lastpass-cli
+    install: "{{ lastpass_cli }}"
+    install_with: apt
+
+  - name: bitwarden
+    install: "{{ bitwarden }}"
+    install_with: snap
+
+  - name: bw
+    install: "{{ bitwarden_cli }}"
+    install_with: snap
+
+tmuxinator_alias: |
+  alias mux=tmuxinator
+
+docker_compose_version: "1.23.2"

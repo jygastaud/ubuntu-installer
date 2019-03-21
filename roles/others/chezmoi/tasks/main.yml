@@ -1,0 +1,4 @@
+---
+- name: Install chezmoi .deb package from the internet.
+  apt:
+    deb: https://github.com/twpayne/chezmoi/releases/download/v{{ chezmoi_version }}/chezmoi_{{ chezmoi_version }}-{{ chezmoi_version_additional }}_linux_amd64.deb

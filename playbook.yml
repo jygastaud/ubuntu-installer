@@ -14,7 +14,7 @@
     #- { role: gantsign.oh-my-zsh, when: zsh, tags: [shell, zsh] }
     - { role: oefenweb.chrome, when: chrome, tags: [browser, chrome] }
     - { role: geerlingguy.docker, when: docker, tags: [docker, dev-tools] }
-    - { role: dev-tools/tmuxinator, when: tmuxinator, tags: [tmuxinator, dev-tools] }
+    #- { role: dev-tools/tmuxinator, when: tmuxinator, tags: [tmuxinator, dev-tools] }
     - { role: aeimer.install_bat, when: bat, tags: [bat, dev-tools] }
     - { role: dev-tools/mysql-workbench, when: mysql_workbench }
     - { role: jaredhocutt.franz, when: franz, tags: [franz, messaging] }
@@ -22,6 +22,7 @@
     - { role: dev-tools/pet, when: pet_cli, tags: [dev-tools] }
     - { role: dev-tools/openshift_client, when: openshift_client, tags: [openshift_client, k8s, cloud] }
     - { role: others/insync, when: insync, tags: [insync, drive] }
+    - { role: others/chezmoi, when: chezmoi, tags: [chezmoi, dotfiles] }
 
   post_tasks:
     - name: Update .zshrc
@@ -40,10 +41,10 @@
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump_alias #"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump #"
             content: |
               source /usr/share/autojump/autojump.sh
-          when: autojump_alias and update_shell_sources
+          when: autojump and update_shell_sources
 
         - name: Add custom aliases
           become: no

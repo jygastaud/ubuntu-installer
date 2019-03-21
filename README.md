@@ -19,6 +19,7 @@ pip install git+https://github.com/ansible/ansible.git@devel
 ***Tools marked with ✔ are installed by default. You can override the config.yml file to match your needs.***
 
 * ✔ System packages (install with Snap or apt)
+    * asciinema
     * autojump
     * ✔ curl
     * direnv
