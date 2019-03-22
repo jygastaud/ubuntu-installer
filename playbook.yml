@@ -71,10 +71,10 @@
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.bashrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump_alias #"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump #"
             content: |
               source /usr/share/autojump/autojump.sh
-          when: autojump_alias and update_shell_sources
+          when: autojump and update_shell_sources
 
         - name: Add custom aliases
           become: no
