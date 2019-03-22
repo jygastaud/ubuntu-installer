@@ -65,6 +65,7 @@ pip install git+https://github.com/ansible/ansible.git@devel
   * Pet - Snippets Manager
   * Meet Franz
   * Typora - Markdown Editor
+  * Spotify
 
 ## Quick start
 

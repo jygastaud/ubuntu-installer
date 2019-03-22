@@ -168,9 +168,10 @@ insync: yes
 mysql_workbench: no
 filezilla: no
 # [Postman](https://www.getpostman.com/)
-postman: yes
+postman: no
 # [Typora - Markdown Editor](https://typora.io/#linux)
-typora: yes
+typora: no
+spotify: no
 
 ##### SHELL CONFIGS #####
 zsh: no
@@ -372,6 +373,11 @@ packages:
 
   - name: bw
     install: "{{ bitwarden_cli }}"
+    install_with: snap
+
+  ### Entertainment ###
+  - name: spotify
+    install: "{{ spotify }}"
     install_with: snap
 
 tmuxinator_alias: |
