@@ -23,6 +23,7 @@
     - { role: dev-tools/openshift_client, when: openshift_client, tags: [openshift_client, k8s, cloud] }
     - { role: others/insync, when: insync, tags: [insync, drive] }
     - { role: others/chezmoi, when: chezmoi, tags: [chezmoi, dotfiles] }
+    - { role: andrewrothstein.go, when: golang, tags: [golang] }
 
   post_tasks:
     - name: Update .zshrc
@@ -45,6 +46,24 @@
             content: |
               source /usr/share/autojump/autojump.sh
           when: autojump and update_shell_sources
+
+        - name: Add GOPATH and GOBIN
+          become: no
+          block:
+            - name: Create go dir
+              with_items:
+                - '{{go_dev_path}}'
+              file:
+                path: '{{item}}'
+                state: directory
+                mode: '0755'
+
+            - blockinfile:
+                path: "{{ lookup('env','HOME') }}/.zshrc"
+                marker: "# {mark} ANSIBLE MANAGED BLOCK - golang #"
+                content: |
+                  {{ golang_govars }}
+          when: golang and golang_govars and update_shell_sources
 
         - name: Add custom aliases
           become: no
@@ -75,6 +94,24 @@
             content: |
               source /usr/share/autojump/autojump.sh
           when: autojump and update_shell_sources
+
+        - name: Add GOPATH and GOBIN
+          become: no
+          block:
+            - name: Create go dir
+              with_items:
+                - '{{go_dev_path}}'
+              file:
+                path: '{{item}}'
+                state: directory
+                mode: '0755'
+
+            - blockinfile:
+                path: "{{ lookup('env','HOME') }}/.bashrc"
+                marker: "# {mark} ANSIBLE MANAGED BLOCK - golang #"
+                content: |
+                  {{ golang_govars }}
+          when: golang and golang_govars and update_shell_sources
 
         - name: Add custom aliases
           become: no

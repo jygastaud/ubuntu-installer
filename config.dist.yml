@@ -1,74 +1,4 @@
 ---
-
-# Add aliases / autocomplete
-update_aliases: no
-
-
-# Update source files in bashrc/zshrc
-update_shell_sources: no
-
-# Browsers
-chrome: no
-
-# Messaging tools
-# [Meet Franz](https://meetfranz.com/)
-franz: no
-
-# [Insync - Drive for Linux](https://www.insynchq.com)
-insync: no
-
-######## Virtualisation / Containers / Kubernetes ########
-# Docker
-docker: yes
-docker_compose_version: "1.23.2"
-docker_users: []
-
-# Download Openshift Client (oc)
-openshift_client: no
-
-# Vagrant + Virtualbox
-vagrant: no
-virtualbox: no
-
-######## CLI tools ########
-git: yes
-update_gitconfig: no
-
-
-# [Cat clone](https://github.com/sharkdp/bat)
-bat: yes
-
-# [Tmuxinator - Tmux Sessions Manager](https://github.com/tmuxinator/tmuxinator)
-tmuxinator: no
-
-# [PET - snippet manager](https://github.com/knqyf263/pet)
-pet_cli: no
-
-# Shell
-zsh: no
-
-# Oh-My-ZSH
-# # Default theme
-# oh_my_zsh_theme: robbyrussell
-
-# # Default plugins
-# oh_my_zsh_plugins:
-#   - git
-
-# # User configuration
-# # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
-# users:
-#   - username: example1
-#     oh_my_zsh:
-#       theme: robbyrussell
-#       plugins:
-#         - git
-
-######## Others ########
-mysql_workbench: no
-filezilla: no
-
----
 #### ╔═╗╔╗╔╔═╗╔╗ ╦  ╔═╗  ╔╦╗╦ ╦╔═╗  ╔╦╗╔═╗╔═╗╦  ╔═╗ ####
 #### ║╣ ║║║╠═╣╠╩╗║  ║╣    ║ ╠═╣║╣    ║ ║ ║║ ║║  ╚═╗ ####
 #### ╚═╝╝╚╝╩ ╩╚═╝╩═╝╚═╝   ╩ ╩ ╩╚═╝   ╩ ╚═╝╚═╝╩═╝╚═╝ ####
@@ -173,6 +103,9 @@ postman: no
 typora: no
 spotify: no
 
+##### GOLANG #####
+golang: no
+
 ##### SHELL CONFIGS #####
 zsh: no
 
@@ -241,8 +174,8 @@ gitconfig: []
 #       theme: robbyrussell
 #       plugins:
 #         - git
-#          - golang
-#          - kubectl
+#         - golang
+#         - kubectl
 
 
 #### ╔╦╗╔═╗  ╔╗╔╔═╗╔╦╗  ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦ ╦╔╗╔╦  ╔═╗╔═╗╔═╗  ####
@@ -384,3 +317,8 @@ tmuxinator_alias: |
   alias mux=tmuxinator
 
 docker_compose_version: "1.23.2"
+
+go_dev_path: "{{ lookup('env','HOME') }}/go"
+golang_govars: |
+  export GOPATH={{ go_dev_path }}
+  export PATH=$PATH:${GOPATH}/bin
