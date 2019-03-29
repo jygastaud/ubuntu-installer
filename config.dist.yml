@@ -25,7 +25,7 @@ tree: yes
   # ┴  ┴┴ ┴┴     ┴ └─┘└─┘┴└─  ┴  ┴└─└─┘─┴┘└─┘└─┘ ┴ ┴ └┘ ┴ ┴  ┴ 
 
 # [asciinema - Record terminal sesions](https://asciinema.org/)
-asciinema: yes
+asciinema: no
 # [autojump - better cd](https://github.com/wting/autojump)
 autojump: yes
 # [Cat clone](https://github.com/sharkdp/bat)
@@ -37,44 +37,44 @@ httpie: yes
 # [JQ - Json Processor](https://github.com/stedolan/jq)
 jq: yes
 # [Mosh - Mobile Shell](https://mosh.org/)
-mosh: yes
+mosh: no
 # [Peco - Interactive filtering tool](https://github.com/peco/peco)
 peco: yes
 # [PET - snippet manager](https://github.com/knqyf263/pet)
-pet_cli: yes
+pet_cli: no
 # [Rclone - sync files and directories](https://rclone.org/)
-rclone: yes
+rclone: no
 ruby: no
 syncthing: no
 # [Tmuxinator - Tmux Sessions Manager](https://github.com/tmuxinator/tmuxinator)
 tmuxinator: no
 # [YQ - Yaml Processor](https://github.com/mikefarah/yq)
-yq: yes
+yq: no
 
 ##### DOTFILES MANAGER #####
 # [Chezmoi - dotfiles manager](https://github.com/twpayne/chezmoi)
-chezmoi: yes
+chezmoi: no
 
 ##### PASSWORD MANAGERS #####
 # [LastPass CLI]()
-lastpass_cli: yes
+lastpass_cli: no
 # [Bitwarden Desktop]()
 bitwarden: no
 # [Bitwarden CLI]()
-bitwarden_cli: yes
+bitwarden_cli: no
 
 ##### EDITORS #####
 atom: no
-phpstorm: yes
+phpstorm: no
 sublime: no
-vscode: yes
+vscode: no
 
 ##### BROWSERS #####
 chrome: yes
 
 ##### MESSAGING #####
 # [Meet Franz](https://meetfranz.com/)
-franz: yes
+franz: no
 
 ##### Virtualisation / Containers / Kubernetes #####
 # Docker
@@ -83,18 +83,18 @@ docker_users:
   - "{{ ansible_ssh_user }}"
 
 aws_cli: no
-kubectl: yes
+kubectl: no
 
 # Download Openshift Client (oc)
-openshift_client: yes
+openshift_client: no
 
 # Vagrant + Virtualbox
-vagrant: yes
-virtualbox: yes
+vagrant: no
+virtualbox: no
 
 ##### OTHER APPS #####
 # [Insync - Drive for Linux](https://www.insynchq.com)
-insync: yes
+insync: no
 mysql_workbench: no
 filezilla: no
 # [Postman](https://www.getpostman.com/)
@@ -102,9 +102,10 @@ postman: no
 # [Typora - Markdown Editor](https://typora.io/#linux)
 typora: no
 spotify: no
-
-##### GOLANG #####
 golang: no
+
+##### VPN #####
+openvpn: yes
 
 ##### SHELL CONFIGS #####
 zsh: no
@@ -137,21 +138,21 @@ update_gitconfig: yes
 #       [user]
 #         name = My Name
 #         email = my@email.com
-
+#
 #       [alias]
 #         amend = commit --amend
 #         st = status
 #         co = checkout
 #         hist = log --pretty=oneline --abbrev-commit --graph --decorate --date=short
-
+#
 #       [includeIf "gitdir:~/workspace/divers/"]
 #         path = ~/.gitconfig-perso
-
+#
 #   - name: ".gitconfig-perso"
 #     value: |
 #       [user]
 #         email = myother@email.com
-      
+#     
 #       [core]
 #         editor = "code -w"
 gitconfig: []
@@ -203,7 +204,7 @@ packages:
 
   - name: direnv
     install: "{{ direnv }}"
-    install_with: snap
+    install_with: apt
 
   - name: htop
     install: "{{ htop }}"
@@ -312,6 +313,15 @@ packages:
   - name: spotify
     install: "{{ spotify }}"
     install_with: snap
+
+  ### VPN ###
+  - name: openvpn
+    install: "{{ openvpn }}"
+    install_with: apt
+
+  - name: network-manager-openvpn
+    install: "{{ openvpn }}"
+    install_with: apt
 
 tmuxinator_alias: |
   alias mux=tmuxinator

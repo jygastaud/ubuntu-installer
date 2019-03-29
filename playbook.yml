@@ -65,6 +65,15 @@
                   {{ golang_govars }}
           when: golang and golang_govars and update_shell_sources
 
+        - name: Add autocompletion to zsh
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - direnv #"
+            content: |
+              eval "$(direnv hook zsh)"
+          when: direnv and update_shell_sources
+
         - name: Add custom aliases
           become: no
           blockinfile:
@@ -112,6 +121,15 @@
                 content: |
                   {{ golang_govars }}
           when: golang and golang_govars and update_shell_sources
+
+        - name: Add autocompletion to bash
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.bashrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - direnv #"
+            content: |
+              eval "$(direnv hook zsh)"
+          when: direnv and update_shell_sources
 
         - name: Add custom aliases
           become: no
