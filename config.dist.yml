@@ -111,7 +111,7 @@ openvpn: yes
 zsh: no
 
 ##### Shell Aliases #####
-update_aliases: yes
+update_aliases: no
 
 # Example
 # custom_aliases: |
@@ -124,11 +124,11 @@ custom_aliases: ""
 
 ##### SOURCED FILES #####
 # Update source files in bashrc/zshrc
-update_shell_sources: yes
+update_shell_sources: no
 
 ##### Git CONFIG #####
 
-update_gitconfig: yes
+update_gitconfig: no
 # Example
 # gitconfig:
 #   # The name of the file that need to be created or updated

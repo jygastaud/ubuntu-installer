@@ -20,12 +20,13 @@ pip install git+https://github.com/ansible/ansible.git@devel
 
 * ✔ System packages (install with Snap or apt)
     * asciinema
-    * autojump
+    * ✔ autojump
+    * ✔ bat
     * ✔ curl
-    * direnv
+    * ✔ direnv
     * ✔ htop
-    * httpie
-    * jq
+    * ✔ httpie
+    * ✔ jq
     * mosh
     * ✔ peco
     * postman
@@ -49,7 +50,7 @@ pip install git+https://github.com/ansible/ansible.git@devel
   * aws-cli
 
 * Browsers
-  * Chrome (via snap package)
+  * ✔ Chrome (via snap package)
 
 * Shell
   * Zsh & Oh-My-Zsh (/!\ need tests /!\)
