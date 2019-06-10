@@ -1,0 +1,15 @@
+---
+# defaults file for openshift-origin-client-tools
+faas_mirror: https://github.com/openfaas/faas-cli/releases/download
+faas_ver: '0.8.8'
+
+faas_install_parent_dir: /usr/local/bin
+
+faas_privilege_escalation: True
+
+# Timeout in seconds for faas download request
+faas_download_timeout: 10
+
+# Whether the symlink should be forced or not. No for backwards compatibility.
+force_faas_link: no
+force_faas_unarchive: no

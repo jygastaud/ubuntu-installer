@@ -6,6 +6,7 @@
   snap:
     name: "{{ item.name }}"
     classic: "{{ item.classic | default(omit) }}"
+    channel: "{{ item.channel | default(omit) }}"
   loop: "{{ all_packages }}"
   when: 
     - item.install | default(False)

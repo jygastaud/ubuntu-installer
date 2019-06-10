@@ -1,0 +1,44 @@
+---
+- name: check for install
+  become: '{{ faas_privilege_escalation }}'
+  become_user: root
+  stat:
+    path: '{{ faas_unarchive_dir }}/faas-cli'
+  changed_when: false
+  register: faas_binary_present
+
+- when: not faas_binary_present.stat.exists
+  block:
+    - name: download...
+      become: '{{ faas_privilege_escalation }}'
+      become_user: root
+      get_url:
+        url: '{{ faas_download_url }}'
+        dest: /tmp/{{ faas_filename }}
+        mode: 0644
+        # checksum: '{{ faas_checksum }}'
+        timeout: '{{ faas_download_timeout }}'
+
+    - name: create directory for unarchive if required...
+      become: '{{ faas_privilege_escalation }}'
+      become_user: root
+      file:
+        path: '{{ faas_unarchive_dir }}'
+        state: directory
+        mode: 0755
+
+    - name: unarchive
+      become: '{{ faas_privilege_escalation }}'
+      become_user: root
+      copy:
+        remote_src: yes
+        src: /tmp/{{ faas_filename }}
+        dest: '{{ faas_unarchive_dir }}/faas-cli'
+        mode: 0755
+  always:
+    - name: cleanup
+      become: yes
+      become_user: root
+      file:
+        path: /tmp/{{ faas_filename }}
+        state: absent

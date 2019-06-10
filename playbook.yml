@@ -24,6 +24,20 @@
     - { role: others/insync, when: insync, tags: [insync, drive] }
     - { role: others/chezmoi, when: chezmoi, tags: [chezmoi, dotfiles] }
     - { role: andrewrothstein.go, when: golang, tags: [golang] }
+    - { role: dev-tools/footloose, when: footloose, tags: [footloose] }
+    - { role: dev-tools/faas-cli, when: faas, tags: [faas] }
+    # - { role: custom, become: no, tags: [custom] }
+    - { role: others/calibre-ebook, when: calibre, tags: [calibre] }
+
+  # @todo
+  # Install zsh-plugins
+  # Install editor * plugins (vscode, phpstorm)
+  # Install autotag
+  # molotov
+  # java
+  # hub ?
+  # red : https://github.com/antonmedv/red
+  # bash-it : https://github.com/Bash-it/bash-it ?
 
   post_tasks:
     - name: Update .zshrc
@@ -153,3 +167,9 @@
           {{ item.value }}
       loop: "{{ gitconfig|flatten(levels=1) }}"
       when: update_gitconfig
+
+    - name: Restart network-manager
+      when: openvpn
+      service:
+        name: openvpn
+        state: restarted

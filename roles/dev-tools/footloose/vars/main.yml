@@ -1,0 +1,13 @@
+---
+# vars file for footloose
+footloose_name: 'footloose-{{ footloose_ver }}-{{ footloose_platform }}'
+footloose_filename: '{{ footloose_name }}'
+
+# https://github.com/weaveworks/footloose/releases/download/0.3.0/footloose-0.3.0-linux-x86_64
+footloose_download_url: '{{ footloose_mirror }}/{{ footloose_ver }}/{{ footloose_filename }}'
+footloose_checksum: '{{ footloose_checksums[footloose_ver][footloose_sha][footloose_platform] }}'
+
+footloose_unarchive_dir: '{{ footloose_install_parent_dir }}'
+
+# /usr/local/bin/footloose-0.3.0-linux-x86_64/
+footloose_install_dir: '{{ footloose_install_parent_dir }}/{{ footloose_name }}'

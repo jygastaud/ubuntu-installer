@@ -1,0 +1,23 @@
+---
+# defaults file for openshift-origin-client-tools
+footloose_mirror: https://github.com/weaveworks/footloose/releases/download
+footloose_platform: 'linux-x86_64'
+
+footloose_ver: '0.3.0'
+footloose_sha: '5253a07'
+
+footloose_checksums:
+  O.3.0:
+    5253a07:
+      linux-x86_64: sha256:f7353a05a89425fd7e8afe43df6f68bf460682231f768c084e27891fc2e5e148
+
+footloose_install_parent_dir: /usr/local/bin
+
+footloose_privilege_escalation: True
+
+# Timeout in seconds for footloose download request
+footloose_download_timeout: 10
+
+# Whether the symlink should be forced or not. No for backwards compatibility.
+force_footloose_link: no
+force_footloose_unarchive: no

@@ -1,0 +1,12 @@
+---
+# vars file for faas
+faas_name: 'faas-cli'
+faas_filename: '{{ faas_name }}'
+
+# https://github.com/weaveworks/faas/releases/download/0.3.0/faas-0.3.0-linux-x86_64
+faas_download_url: '{{ faas_mirror }}/{{ faas_ver }}/{{ faas_filename }}'
+
+faas_unarchive_dir: '{{ faas_install_parent_dir }}'
+
+# /usr/local/bin/faas-0.3.0-linux-x86_64/
+faas_install_dir: '{{ faas_install_parent_dir }}/{{ faas_name }}'

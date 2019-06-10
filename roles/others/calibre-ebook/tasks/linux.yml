@@ -1,0 +1,4 @@
+---
+- name: Install Calibre
+  become: yes
+  shell: wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sh /dev/stdin

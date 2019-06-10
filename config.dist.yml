@@ -84,15 +84,28 @@ docker_users:
 
 aws_cli: no
 kubectl: no
+gcloud: no
 
 # Download Openshift Client (oc)
 openshift_client: no
+
+# Microk8s
+microk8s: no
+
+# Helm
+helm: no
+
+# Faas CLI
+faas: no
 
 # Vagrant + Virtualbox
 vagrant: no
 virtualbox: no
 
 ##### OTHER APPS #####
+calibre: no
+claat: no
+footloose: no
 # [Insync - Drive for Linux](https://www.insynchq.com)
 insync: no
 mysql_workbench: no
@@ -103,6 +116,13 @@ postman: no
 typora: no
 spotify: no
 golang: no
+go_dev_path: "{{ lookup('env','HOME') }}/go"
+golang_govars: |
+  export GOPATH={{ go_dev_path }}
+  export PATH=$PATH:${GOPATH}/bin
+
+# GoHugo
+gohugo: no
 
 ##### VPN #####
 openvpn: yes
@@ -275,7 +295,7 @@ packages:
     install_with: snap
 
   # Visual Studio Code
-  - name: vscode
+  - name: code
     classic: yes
     install: "{{ vscode }}"
     install_with: snap
@@ -284,6 +304,19 @@ packages:
   - name: postman
     install: "{{ postman }}"
     install_with: snap
+  
+  - name: filezilla
+    install: "{{ filezilla }}"
+    install_with: apt
+
+  - name: hugo
+    channel: extended/stable
+    install: "{{ gohugo }}"
+    install_with: snap
+
+  - name: claat
+    install: "{{ claat }}"
+    install_with: snap 
 
   ## Cloud / Kubernetes Related
   - name: aws-cli
@@ -294,6 +327,22 @@ packages:
   - name: kubectl
     classic: yes  
     install: "{{ kubectl }}"
+    install_with: snap
+  
+  - name: microk8s
+    classic: yes
+    channel: edge
+    install: "{{ microk8s }}"
+    install_with: snap
+
+  - name: helm
+    classic: yes
+    install: "{{ helm }}"
+    install_with: snap
+
+  - name: google-cloud-sdk
+    classic: yes
+    install: "{{ gcloud }}"
     install_with: snap
 
   ### PASSWORD MANAGERS ###
@@ -314,6 +363,15 @@ packages:
     install: "{{ spotify }}"
     install_with: snap
 
+  ### Mouse management ###
+  - name: solaar
+    install: yes
+    install_with: apt
+
+  - name: solaar-gnome3
+    install: yes
+    install_with: apt
+
   ### VPN ###
   - name: openvpn
     install: "{{ openvpn }}"
@@ -327,8 +385,3 @@ tmuxinator_alias: |
   alias mux=tmuxinator
 
 docker_compose_version: "1.23.2"
-
-go_dev_path: "{{ lookup('env','HOME') }}/go"
-golang_govars: |
-  export GOPATH={{ go_dev_path }}
-  export PATH=$PATH:${GOPATH}/bin
