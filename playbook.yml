@@ -29,6 +29,7 @@
     - { role: dev-tools/faas-cli, when: faas, tags: [faas] }
     # - { role: custom, become: no, tags: [custom] }
     - { role: others/calibre-ebook, when: calibre, tags: [calibre] }
+    - { role: geerlingguy.java, when: java, tags: [java] }
 
   # @todo
   # Install zsh-plugins

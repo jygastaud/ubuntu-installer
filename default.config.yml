@@ -126,6 +126,7 @@ gohugo: no
 
 ##### VPN #####
 openvpn: yes
+java: yes
 
 ##### SHELL CONFIGS #####
 zsh: no
@@ -384,4 +385,4 @@ packages:
 tmuxinator_alias: |
   alias mux=tmuxinator
 
-docker_compose_version: "1.23.2"
+docker_compose_version: "1.24.1"
