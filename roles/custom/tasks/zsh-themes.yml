@@ -1,0 +1,16 @@
+---
+# Tasks to install zsh themes
+
+- name: Download zsh-themes
+  become: no
+  git:
+    repo: "{{ item.url }}"
+    dest: "{{ lookup('env', 'ZSH_CUSTOM') }}/themes/{{ item.dest }}"
+    version: "{{ item.version | default('master') }}"
+  loop: "{{ zsh_themes | flatten(levels=1) }}"
+
+# - name: Symlink zsh-themes
+#   file:
+#     src: /file/to/link/to
+#     dest: /path/to/symlink
+#     state: link

@@ -1,7 +1,7 @@
 ---
 # defaults file for openshift-origin-client-tools
 faas_mirror: https://github.com/openfaas/faas-cli/releases/download
-faas_ver: '0.8.8'
+faas_ver: '0.11.7'
 
 faas_install_parent_dir: /usr/local/bin
 

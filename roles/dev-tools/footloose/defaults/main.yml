@@ -7,6 +7,24 @@ footloose_ver: '0.3.0'
 footloose_sha: '5253a07'
 
 footloose_checksums:
+  O.6.3:
+    352435f:
+      linux-x86_64: sha256:7a19cc713320373d756de4d57b0375369e87cefecce2e7dec58aac12174481b9
+  O.6.2:
+    81947b7:
+      linux-x86_64: sha256:d8d1e03578f24212afb02d7252d44ffd3899fdaf535587bb219f862abfe5aba7
+  O.6.1:
+    13f99fb:
+      linux-x86_64: sha256:2ac084bc5bf4ba2dbcfa2ab91601e32172194aac7a8deb8561a5ed73f4635fc4
+  O.6.0:
+    df20164:
+      linux-x86_64: sha256:d84f79d37a85b73bbfdeb3adc46b7e2b1db270c6c7d222637c6291f9a49164aa
+  O.5.0:
+    d0212e3:
+      linux-x86_64: sha256:0e4e49e81940c5876eafa26607154acd788d9979e9f4a4215f17532a3ea5429a
+  O.4.0:
+    ad531ff:
+      linux-x86_64: sha256:94a29c963763af58267eb184f094c536f0b6b73fa2f99dbbc9b33503fa66475a
   O.3.0:
     5253a07:
       linux-x86_64: sha256:f7353a05a89425fd7e8afe43df6f68bf460682231f768c084e27891fc2e5e148

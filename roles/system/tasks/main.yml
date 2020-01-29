@@ -1,21 +1,36 @@
 ---
 - set_fact:
-    all_packages: "{{ packages | flatten(levels=1) }}"
+    snap_packages: "{{ packages | selectattr('install_with', 'equalto', 'snap') | list }}"
+  tags:
+    - system
+    - snap
+
+- set_fact:
+    apt_packages: "{{ packages | selectattr('install_with', 'equalto', 'apt') | list }}"
+  tags:
+    - system
+    - apt
 
 - name: Install packages with snaps
+  tags:
+    - system
+    - snap
   snap:
     name: "{{ item.name }}"
     classic: "{{ item.classic | default(omit) }}"
     channel: "{{ item.channel | default(omit) }}"
-  loop: "{{ all_packages }}"
+    state: "present"
+  loop: "{{ snap_packages }}"
   when: 
     - item.install | default(False)
     - item.install_with == 'snap'
 
-- name: install packages with APT
-  tags: system
+- name: Install packages with APT
+  tags:
+    - system
+    - apt
   apt: pkg={{ item.name }} state=latest update_cache=yes
-  loop: "{{ all_packages }}"
+  loop: "{{ apt_packages }}"
   when: 
     - item.install | default(False)
     - item.install_with == 'apt'

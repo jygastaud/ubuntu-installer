@@ -72,10 +72,6 @@ vscode: no
 ##### BROWSERS #####
 chrome: yes
 
-##### MESSAGING #####
-# [Meet Franz](https://meetfranz.com/)
-franz: no
-
 ##### Virtualisation / Containers / Kubernetes #####
 # Docker
 docker: yes
@@ -83,8 +79,9 @@ docker_users:
   - "{{ ansible_ssh_user }}"
 
 aws_cli: no
-kubectl: no
+kubectl: yes
 gcloud: no
+#azure_cli: no #not available
 
 # Download Openshift Client (oc)
 openshift_client: no
@@ -101,19 +98,28 @@ faas: no
 # Vagrant + Virtualbox
 vagrant: no
 virtualbox: no
+nfs: yes
 
 ##### OTHER APPS #####
 calibre: no
 claat: no
 footloose: no
+multipass: no
+
 # [Insync - Drive for Linux](https://www.insynchq.com)
 insync: no
 mysql_workbench: no
-filezilla: no
+filezilla: yes
+
+parallel: yes
+expect: no
+xsel: yes
+svn: no
+
 # [Postman](https://www.getpostman.com/)
-postman: no
+postman: yes
 # [Typora - Markdown Editor](https://typora.io/#linux)
-typora: no
+typora: yes
 spotify: no
 golang: no
 go_dev_path: "{{ lookup('env','HOME') }}/go"
@@ -126,10 +132,41 @@ gohugo: no
 
 ##### VPN #####
 openvpn: yes
-java: yes
 
 ##### SHELL CONFIGS #####
-zsh: no
+zsh: yes
+
+# Oh-My-ZSH CONFIG
+# Default theme
+oh_my_zsh_theme: robbyrussell
+
+# Default plugins
+oh_my_zsh_plugins:
+  - git
+
+# User configuration
+# Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
+users:
+  - username: "{{ ansible_ssh_user }}"
+    oh_my_zsh:
+      theme: geoffgarside
+      plugins:
+        - git
+        - kubectl
+        - ansible
+        - docker
+        - zsh-autosuggestions
+        - tmux
+
+zsh_themes:
+  - url: https://github.com/denysdovhan/spaceship-prompt.git
+    dest: spaceship-prompt
+    symlink: yes
+    # Relative path from $ZSH_CUSTOM/themes/ - No / at start
+    symlink_from: "spaceship-prompt/spaceship.zsh-theme"
+    # Relative path from $ZSH_CUSTOM/themes/ - No / at start
+    symlink_to: "spaceship.zsh-theme"
+
 
 ##### Shell Aliases #####
 update_aliases: no
@@ -150,6 +187,7 @@ update_shell_sources: no
 ##### Git CONFIG #####
 
 update_gitconfig: no
+
 # Example
 # gitconfig:
 #   # The name of the file that need to be created or updated
@@ -178,7 +216,6 @@ update_gitconfig: no
 #         editor = "code -w"
 gitconfig: []
 
-
 ##### Oh-My-ZSH CONFIG #####
 
 # # Default theme
@@ -199,6 +236,11 @@ gitconfig: []
 #         - golang
 #         - kubectl
 
+# Update default versions
+docker_compose_version: "1.25.3"
+faas_ver: '0.11.7'
+chezmoi_version: "1.7.12"
+footloose_ver: '0.6.3'
 
 #### ╔╦╗╔═╗  ╔╗╔╔═╗╔╦╗  ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦ ╦╔╗╔╦  ╔═╗╔═╗╔═╗  ####
 ####  ║║║ ║  ║║║║ ║ ║   ║  ╠═╣╠═╣║║║║ ╦║╣   ║ ║║║║║  ║╣ ╚═╗╚═╗  ####
@@ -277,6 +319,15 @@ packages:
     install: "{{ tree }}"
     install_with: snap
 
+  # NFS
+  - name: nfs-common
+    install: "{{ nfs }}"
+    install_with: apt
+
+  - name: nfs-kernel-server
+    install: "{{ nfs }}"
+    install_with: apt
+
   ## Editors ##
   # Atom
   - name: atom
@@ -317,7 +368,23 @@ packages:
 
   - name: claat
     install: "{{ claat }}"
-    install_with: snap 
+    install_with: snap
+
+  - name: parallel
+    install: "{{ parallel }}"
+    install_with: apt
+
+  - name: xsel
+    install: "{{ xsel }}"
+    install_with: apt
+
+  - name: expect
+    install: "{{ expect }}"
+    install_with: apt
+
+  - name: subversion
+    install: "{{ svn }}"
+    install_with: apt
 
   ## Cloud / Kubernetes Related
   - name: aws-cli
@@ -344,6 +411,11 @@ packages:
   - name: google-cloud-sdk
     classic: yes
     install: "{{ gcloud }}"
+    install_with: snap
+  
+  - name: multipass
+    classic: yes
+    install: "{{ multipass }}"
     install_with: snap
 
   ### PASSWORD MANAGERS ###
@@ -382,7 +454,3 @@ packages:
     install: "{{ openvpn }}"
     install_with: apt
 
-tmuxinator_alias: |
-  alias mux=tmuxinator
-
-docker_compose_version: "1.24.1"
