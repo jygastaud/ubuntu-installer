@@ -1,78 +1,15 @@
 # ubuntu-installer
 
-## DESCRIPTION
+Easily install and configure your Ubuntu 18.04 Desktop installation.
 
-Easily configure your Ubuntu 18.04 Desktop installation.
+## Requirements
 
-## WARNING
+In order to run the the following installation process and script you need to have :
 
-You need to use the 2.8+ version which is not release at that time (March, 19th 2019).
-You can install the good version using the development version.
-
-```
-sudo apt install python-pip
-pip install git+https://github.com/ansible/ansible.git@devel
-```
-
-## Tools installed
-
-***Tools marked with ✔ are installed by default. You can override the config.yml file to match your needs.***
-
-* ✔ System packages (install with Snap or apt)
-    * asciinema
-    * ✔ autojump
-    * ✔ bat
-    * ✔ curl
-    * ✔ direnv
-    * ✔ htop
-    * ✔ httpie
-    * ✔ jq
-    * mosh
-    * ✔ peco
-    * postman
-    * rclone
-    * ruby
-    * syncthing
-    * ✔ tmux
-    * tmuxinator (/!\ need tests /!\)
-    * ✔ tree
-    * yq
-
-* Dev tools
-  * ✔ Docker (with official repository)
-  * ✔ Docker Compose
-  * ✔ Git (with official repository)
-  * MySQL Workbench
-  * Virtualbox
-  * Vagrant
-  * kubectl
-  * openshift client (oc)
-  * aws-cli
-
-* Browsers
-  * ✔ Chrome (via snap package)
-
-* Shell
-  * Zsh & Oh-My-Zsh (/!\ need tests /!\)
-
-* Editor / IDE
-  * Atom (via snap)
-  * PHPStorm (via snap)
-  * Sublime Text (via snap)
-  * VSCode (via snap)
-
-* Others
-  * FileZilla
-  * Pet - Snippets Manager
-  * Meet Franz
-  * Typora - Markdown Editor
-  * Spotify
-
-## Quick start
-
-### Requirements
-
-In order to run this script you need to have access to a shell, git (for installation of ansible dev version), unzip and wget.
+* access to a shell
+* unzip
+* wget
+* Ansible 2.8+ (we handled the installation via the run.sh script)
 
 ### Installation
 
@@ -80,36 +17,28 @@ In order to run this script you need to have access to a shell, git (for install
 wget -O installer.zip https://github.com/jygastaud/ubuntu-installer/archive/<branch>.zip
 unzip installer
 cd installer
-cp config.dist.yml config.yml
 ```
 
-Edit the config.yml file  
+if you want to update the default settings : 
+
+```
+cp default.config.yml config.yml
+```
+
+and edit the config.yml file
+
 Then
 
-```
-./run.sh
-```
-
-## Detailed Installation
-
-### Requirements
-
-In order to run this script you need to have access to a shell, unzip and wget and ansible.
-
-### Installation
+### If you have Ansible already installed
 
 ```
-wget -O installer.zip https://github.com/jygastaud/ubuntu-installer/archive/<branch>.zip
-unzip installer
-cd installer
-cp config.dist.yml config.yml
+./run.sh --ansible
 ```
-Edit the config.yml file  
-Then
+
+### If you want to install Ansible first
 
 ```
-ansible-galaxy install -r requirements.yml
-ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass
+./run.sh --ansible
 ```
 
 ## Specific component installation
@@ -130,20 +59,98 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
 ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag git
 ```
 
-* Install only packages
-
-```
-ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag packages
-```
-
 * Install all `dev-tools`
 
 ```
 ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag dev-tools
 ```
 
+
+## Tools managed and installed by default
+
+***Tools marked with ✔ are installed by default. You can override the config.yml file to match your needs.***
+
+* ✔ System packages (install with Snap or apt)
+    * [asciinema - Record terminal sesions](https://asciinema.org/)
+    * ✔ [autojump - better cd](https://github.com/wting/autojump)
+    * ✔ [Bat - Cat clone](https://github.com/sharkdp/bat)
+    * ✔ curl
+    * ✔ [direnv - Easy management of local environment variables](https://direnv.net/)
+    * expect
+    * ✔ htop
+    * ✔ [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
+    * ✔ [JQ - Json Processor](https://github.com/stedolan/jq)
+    * [Mosh - Mobile Shell](https://mosh.org/)
+    * ✔ nfs
+    * ✔ OpenVPN
+    * ✔ Parallel
+    * ✔ [Peco - Interactive filtering tool](https://github.com/peco/peco)
+    * ✔ [Postman](https://www.getpostman.com/)
+    * [Rclone - sync files and directories](https://rclone.org/)
+    * ruby
+    * syncthing
+    * ✔ tmux
+    * ✔ tree
+    * [YQ - Yaml Processor](https://github.com/mikefarah/yq)
+    * ✔ xsel
+
+* Dev tools
+  * ✔ Docker (with official repository)
+  * ✔ Docker Compose
+  * ✔ Git (with official repository)
+  * MySQL Workbench
+  * Virtualbox
+  * Vagrant
+  * kubectl
+  * openshift client (oc)
+  * aws-cli
+  * google-cloud-sdk
+  * multipass
+  * footloose
+  * helm
+  * subversion
+  * faas
+  * microk8s
+
+* Browsers
+  * ✔ Chrome (via snap package)
+  
+*Firefox is not installed here as it is include even in minial installation of Ubuntu.*
+
+* Shell
+  * ✔ Zsh & Oh-My-Zsh
+
+* Editor / IDE
+  * Atom (via snap)é
+  * PHPStorm (via snap)
+  * Sublime Text (via snap)
+  * VSCode (via snap)
+
+* Others
+  * Calibre
+  * Claat
+  * [Chezmoi - dotfiles manager](https://github.com/twpayne/chezmoi)
+  * FileZilla
+  * InSync - Google Drive Synchro
+  * [Pet - snippet manager](https://github.com/knqyf263/pet)
+  * ✔ Typora - Markdown Editor
+  * Spotify
+
+* Password managers
+  * [LastPass CLI]()
+  * [Bitwarden Desktop]()
+  * [Bitwarden CLI]()
+
+## Others options available
+
+config file also allows you to define :
+
+* your oh_my_zsh configurations (theme, plugins)
+* your shell aliases
+* your git config
+
 ## Plan
 
 * Add the following tools
+  * Azure cli
   * Others? Create an issue!
-* Update `run.sh` to allow partial installation

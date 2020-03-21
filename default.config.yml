@@ -79,7 +79,7 @@ docker_users:
   - "{{ ansible_ssh_user }}"
 
 aws_cli: no
-kubectl: yes
+kubectl: no
 gcloud: no
 #azure_cli: no #not available
 
@@ -109,7 +109,7 @@ multipass: no
 # [Insync - Drive for Linux](https://www.insynchq.com)
 insync: no
 mysql_workbench: no
-filezilla: yes
+filezilla: no
 
 parallel: yes
 expect: no

@@ -1,14 +1,66 @@
-# Install ansible
-# sudo apt-add-repository ppa:ansible/ansible
-# sudo apt-get update
-# sudo apt-get install ansible
+#!/usr/bin/env bash
 
-# We use the snap module with will be available in 2.8
-sudo apt install python-pip
-pip install git+https://github.com/ansible/ansible.git@devel
+set -o pipefail
 
-# Download galaxy roles
-ansible-galaxy install -r requirements.yml --force
+#--- Handle errors ---#
+error() {
+  local name="$1"
+  echo "Dependency "$name" not found."
+  if [[ "${name}" == "ansible" ]];
+  then
+      echo "Retry to run with --ansible option if you want an automatic install,"
+      echo "or install ansible by yourself first."
+  fi
+  exit 1
+}
 
-# Provisionning
-ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass
+install-ansible() {
+  echo "---> Install ansible - start"
+  sudo apt-add-repository ppa:ansible/ansible
+  sudo apt-get update
+  sudo apt-get install ansible
+  echo "---> Install ansible - done"
+}
+
+install-ansible-dev() {
+  # We use the snap module with will be available in 2.8
+  sudo apt install python-pip
+  pip install git+https://github.com/ansible/ansible.git@devel
+}
+
+install-tools () {
+  local ansiblegalaxy="$(which ansible-galaxy)"
+  local ansibleplaybook="$(which ansible-playbook)"
+
+  if [[ ! -z "${ansiblegalaxy}" ]] && [[ ! -z "${ansibleplaybook}" ]]; then
+      echo "---> Get dependencies"
+      # Download galaxy roles
+      ${ansiblegalaxy} install -r requirements.yml --force
+
+      echo "---> Install or Update computer - start"
+      # Provisionning
+      ${ansibleplaybook} playbook.yml -i hosts --user=$(whoami) --ask-become-pass
+      echo "---> Install or Update computer - done"
+  else
+      error ansible
+  fi
+}
+
+main() {
+  while [[ "$#" -gt 0 ]]
+  do
+    case $1 in
+      --ansible)
+        install-ansible
+        ;;
+      --ansible-dev)
+        install-ansible-dev
+        ;;
+    esac
+    shift
+  done
+
+  install-tools
+}
+
+main "$@"

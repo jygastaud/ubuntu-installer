@@ -18,7 +18,6 @@
     #- { role: dev-tools/tmuxinator, when: tmuxinator, tags: [tmuxinator, dev-tools] }
     - { role: aeimer.install_bat, when: bat, tags: [bat, dev-tools] }
     - { role: dev-tools/mysql-workbench, when: mysql_workbench }
-    - { role: jaredhocutt.franz, when: franz, tags: [franz, messaging] }
     - { role: editors/typora, when: typora, tags: [typora, editor, markdown] }
     - { role: dev-tools/pet, when: pet_cli, tags: [dev-tools] }
     - { role: dev-tools/openshift_client, when: openshift_client, tags: [openshift_client, k8s, cloud] }
