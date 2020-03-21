@@ -16,12 +16,7 @@ In order to run the the following installation process and script you need to ha
 ```
 wget -O installer.zip https://github.com/jygastaud/ubuntu-installer/archive/<branch>.zip
 unzip installer
-cd installer
-```
-
-if you want to update the default settings : 
-
-```
+cd ubuntu-installer-<branch>
 cp default.config.yml config.yml
 ```
 
