@@ -1,5 +1,6 @@
 - src: gantsign.oh-my-zsh
 - src: oefenweb.chrome
+  version: "v1.0.33"
 - src: oefenweb.virtualbox
 - src: oefenweb.vagrant
 - src: geerlingguy.docker

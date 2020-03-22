@@ -5,8 +5,13 @@
 
   vars_files:
     - "default.config.yml"
-    - "config.yml"
-  
+
+  pre_tasks:
+    - name: Include optional configuration files.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "config.yml"
+
   roles:
     - { role: system, tags: [packages] }
     - { role: dev-tools/git, when: git, tags: [git, dev-tools] }
