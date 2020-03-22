@@ -25,11 +25,16 @@
     - item.install | default(False)
     - item.install_with == 'snap'
 
+- name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
 - name: Install packages with APT
   tags:
     - system
     - apt
-  apt: pkg={{ item.name }} state=latest update_cache=yes
+  apt: pkg={{ item.name }} state=latest
   loop: "{{ apt_packages }}"
   when: 
     - item.install | default(False)
