@@ -2,6 +2,11 @@
 
 Easily install and configure your Ubuntu 18.04 Desktop installation.
 
+⚠️ The branch (20.04) is for preparing new LTS version of Ubuntu.  
+Most of the tasks defined should still work but you may encountered some issues
+if Ubuntu packages evolved or are removed.  
+Feel free to create an issue if so. ⚠️
+
 ## Requirements
 
 In order to run the the following installation process and script you need to have :
