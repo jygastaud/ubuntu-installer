@@ -17,8 +17,8 @@
     - snap
   snap:
     name: "{{ item.name }}"
-    classic: "{{ item.classic | default(omit) }}"
-    channel: "{{ item.channel | default(omit) }}"
+    classic: "{{ item.classic | default(omit) }}"
+    channel: "{{ item.channel | default(omit) }}"
     state: "present"
   loop: "{{ snap_packages }}"
   when: 

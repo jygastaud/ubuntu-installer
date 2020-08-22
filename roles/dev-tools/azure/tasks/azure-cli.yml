@@ -1,0 +1,39 @@
+---
+- name: Install Azure CLI dependencies
+  apt:
+    pkg: "{{ item }}"
+  loop:
+    - ca-certificates 
+    - curl
+    - apt-transport-https
+    - lsb-release 
+    - gnupg
+  tags:
+    - azure
+    - azure-cli
+
+- name: Add Apt signing key for Azure cli
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+    state: present
+  tags:
+    - azure
+    - azure-cli
+
+- name: Install repo for latest insync packages
+  apt_repository:
+    repo: 'deb [arch={{ docker_apt_arch }}] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
+    state: present
+    update_cache: yes
+  tags:
+    - azure
+    - azure-cli
+
+- name: install azure cli
+  tags:
+    - azure
+    - azure-cli
+  apt: 
+    pkg: azure-cli
+    state: latest

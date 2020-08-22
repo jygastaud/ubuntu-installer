@@ -34,7 +34,7 @@ bat: yes
 direnv: yes
 # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
 httpie: yes 
-# [JQ - Json Processor](https://github.com/stedolan/jq)
+# [JQ - Json Processor](https://github.com/stedolan/jq)
 jq: yes
 # [Mosh - Mobile Shell](https://mosh.org/)
 mosh: no
@@ -48,7 +48,7 @@ ruby: no
 syncthing: no
 # [Tmuxinator - Tmux Sessions Manager](https://github.com/tmuxinator/tmuxinator)
 tmuxinator: no
-# [YQ - Yaml Processor](https://github.com/mikefarah/yq)
+# [YQ - Yaml Processor](https://github.com/mikefarah/yq)
 yq: no
 
 ##### DOTFILES MANAGER #####
@@ -77,11 +77,14 @@ chrome: yes
 docker: yes
 docker_users:
   - "{{ ansible_ssh_user }}"
+docker_install_compose: true
+# temporary fix until focal release is available.
+docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} bionic {{ docker_apt_release_channel }}"
 
 aws_cli: no
 kubectl: no
 gcloud: no
-#azure_cli: no #not available
+azure_cli: no
 
 # Download Openshift Client (oc)
 openshift_client: no
@@ -95,32 +98,45 @@ helm: no
 # Faas CLI
 faas: no
 
+# Kontena Lens
+kontenalens: no
+
+# Multipass
+multipass: no
+
 # Vagrant + Virtualbox
 vagrant: no
 virtualbox: no
 nfs: yes
 
+# Nodejs + npm
+nodejs: no
+npm: no
+
 ##### OTHER APPS #####
 calibre: no
 claat: no
 footloose: no
-multipass: no
 
 # [Insync - Drive for Linux](https://www.insynchq.com)
 insync: no
 mysql_workbench: no
+mysql-client: no
 filezilla: no
 
 parallel: yes
 expect: no
 xsel: yes
 svn: no
+traceroute: no
 
 # [Postman](https://www.getpostman.com/)
 postman: yes
 # [Typora - Markdown Editor](https://typora.io/#linux)
 typora: yes
 spotify: no
+vokoscreen: no
+
 golang: no
 go_dev_path: "{{ lookup('env','HOME') }}/go"
 golang_govars: |
@@ -237,9 +253,9 @@ gitconfig: []
 #         - kubectl
 
 # Update default versions
-docker_compose_version: "1.25.3"
-faas_ver: '0.11.7'
-chezmoi_version: "1.7.12"
+docker_compose_version: "1.26.2"
+faas_ver: '0.12.8'
+chezmoi_version: "1.8.5"
 footloose_ver: '0.6.3'
 
 #### ╔╦╗╔═╗  ╔╗╔╔═╗╔╦╗  ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦ ╦╔╗╔╦  ╔═╗╔═╗╔═╗  ####
@@ -328,7 +344,19 @@ packages:
     install: "{{ nfs }}"
     install_with: apt
 
-  ## Editors ##
+  - name: nodejs
+    install: "{{ nodejs }}"
+    install_with: apt
+
+  - name: npm
+    install: "{{ npm }}"
+    install_with: apt
+
+  - name: traceroute
+    install: "{{ traceroute }}"
+    install_with: apt
+
+  ## Editors ##
   # Atom
   - name: atom
     classic: yes
@@ -386,6 +414,11 @@ packages:
     install: "{{ svn }}"
     install_with: apt
 
+  - name: vokoscreen-ng
+    classic: yes
+    install: "{{ vokoscreen }}"
+    install_with: snap
+
   ## Cloud / Kubernetes Related
   - name: aws-cli
     classic: yes
@@ -416,6 +449,11 @@ packages:
   - name: multipass
     classic: yes
     install: "{{ multipass }}"
+    install_with: snap
+
+  - name: kontena-lens
+    classic: yes
+    install: "{{ kontenalens }}"
     install_with: snap
 
   ### PASSWORD MANAGERS ###
@@ -453,4 +491,3 @@ packages:
   - name: network-manager-openvpn
     install: "{{ openvpn }}"
     install_with: apt
-

@@ -2,11 +2,6 @@
 
 Easily install and configure your Ubuntu 18.04 Desktop installation.
 
-⚠️ The branch (20.04) is for preparing new LTS version of Ubuntu.  
-Most of the tasks defined should still work but you may encountered some issues
-if Ubuntu packages evolved or are removed.  
-Feel free to create an issue if so. ⚠️
-
 ## Requirements
 
 In order to run the the following installation process and script you need to have :
@@ -25,14 +20,14 @@ cd ubuntu-installer-<branch>
 cp default.config.yml config.yml
 ```
 
-and edit the config.yml file
+and edit the config.yml file (you can keep only the line you change in that file).
 
 Then
 
 ### If you have Ansible already installed
 
 ```
-./run.sh --ansible
+./run.sh
 ```
 
 ### If you want to install Ansible first
@@ -65,6 +60,7 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
 ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag dev-tools
 ```
 
+**Notes: Tags are not be available for every tools.** 
 
 ## Tools managed and installed by default
 
@@ -81,7 +77,7 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
     * ✔ [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
     * ✔ [JQ - Json Processor](https://github.com/stedolan/jq)
     * [Mosh - Mobile Shell](https://mosh.org/)
-    * ✔ nfs
+    * ✔ NFS
     * ✔ OpenVPN
     * ✔ Parallel
     * ✔ [Peco - Interactive filtering tool](https://github.com/peco/peco)
@@ -90,38 +86,49 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
     * ruby
     * syncthing
     * ✔ tmux
+    * traceroute
     * ✔ tree
     * [YQ - Yaml Processor](https://github.com/mikefarah/yq)
     * ✔ xsel
 
 * Dev tools
-  * ✔ Docker (with official repository)
-  * ✔ Docker Compose
-  * ✔ Git (with official repository)
-  * MySQL Workbench
-  * Virtualbox
-  * Vagrant
-  * kubectl
-  * openshift client (oc)
-  * aws-cli
-  * google-cloud-sdk
-  * multipass
-  * footloose
-  * helm
-  * subversion
-  * faas
-  * microk8s
+  * Code versioning
+    * ✔ Git (with official repository)
+    * Subversion
+  * Cloud tools
+    * aws-cli
+    * [Azure cli](https://docs.microsoft.com/fr-fr/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
+    * google-cloud-sdk
+  * Kubernetes
+    * faas
+    * helm
+    * [Kontena Lens](https://k8slens.dev/)
+    * kubectl
+    * microk8s
+    * openshift client (oc)
+  * Java
+  * Databases
+    * MySQL Workbench
+    * mysql-client
+  * Nodejs + npm
+  * Virtualisation
+    * ✔ Docker (with official repository)
+    * ✔ Docker Compose
+    * footloose
+    * multipass
+    * Virtualbox
+    * Vagrant
 
 * Browsers
-  * ✔ Chrome (via snap package)
-  
+  * ✔ Chrome
+
 *Firefox is not installed here as it is include even in minial installation of Ubuntu.*
 
 * Shell
   * ✔ Zsh & Oh-My-Zsh
 
 * Editor / IDE
-  * Atom (via snap)é
+  * Atom (via snap)
   * PHPStorm (via snap)
   * Sublime Text (via snap)
   * VSCode (via snap)
@@ -137,9 +144,9 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
   * Spotify
 
 * Password managers
-  * [LastPass CLI]()
-  * [Bitwarden Desktop]()
-  * [Bitwarden CLI]()
+  * [LastPass CLI](https://www.lastpass.com)
+  * [Bitwarden Desktop](https://bitwarden.com/)
+  * [Bitwarden CLI](https://bitwarden.com/help/article/cli/)
 
 ## Others options available
 
@@ -152,5 +159,31 @@ config file also allows you to define :
 ## Plan
 
 * Add the following tools
-  * Azure cli
-  * Others? Create an issue!
+  * [Azure functions cli](https://docs.microsoft.com/fr-fr/azure/azure-functions/functions-run-local?tabs=linux%2Ccsharp%2Cbash#v2)
+  * inkscape
+  * vokoscreen
+  * [asdf](https://asdf-vm.com/)
+  * terraform
+  * confluent cloud (ccloud)
+  * hugo (without snap)
+  * jungledisk / junglediskcli
+  * kompose
+  * okteto
+  * lab
+  * protonvpn / protonvpncli (pip)
+  * tldr
+  * fzf
+  * zoom
+  * xclip
+  * pip
+    * diagrams
+    * gitlabci-local
+    * pipenv
+    * tmuxp
+    * blastraduius
+    * ansible-autodoc
+* process
+  * activate/configure vscode plugins
+  * activate/configure phpstorm plugins
+  * find a way to add tags for every tools, so we can install them individually
+* Others? Create an issue!

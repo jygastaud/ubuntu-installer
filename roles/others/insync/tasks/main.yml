@@ -4,12 +4,20 @@
     id: ACCAF35C
     keyserver: keyserver.ubuntu.com
     state: present
+  tags:
+    - insync
+    - drive
+    - sync
 
 - name: Install repo for latest insync packages
   apt_repository:
-    repo: 'deb http://apt.insynchq.com/ubuntu bionic non-free contrib'
+    repo: 'deb http://apt.insync.io/ubuntu {{ ansible_distribution_release }} non-free contrib'
     state: present
     update_cache: yes
+  tags:
+    - insync
+    - drive
+    - sync
 
 - name: install insync
   tags:

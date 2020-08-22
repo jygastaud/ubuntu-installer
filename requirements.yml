@@ -1,4 +1,5 @@
 - src: gantsign.oh-my-zsh
+  version: "2.2.1"
 - src: oefenweb.chrome
   version: "v1.0.33"
 - src: oefenweb.virtualbox

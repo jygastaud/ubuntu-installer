@@ -31,9 +31,10 @@
     - { role: andrewrothstein.go, when: golang, tags: [golang] }
     - { role: dev-tools/footloose, when: footloose, tags: [footloose] }
     - { role: dev-tools/faas-cli, when: faas, tags: [faas] }
-    # - { role: custom, become: no, tags: [custom] }
+    - { role: custom, become: no, tags: [custom, zsh] }
     - { role: others/calibre-ebook, when: calibre, tags: [calibre] }
     - { role: geerlingguy.java, when: java, tags: [java] }
+    - { role: dev-tools/azure, when: azure_cli, tags: [azure, azure-cli] }
 
   # @todo
   # Install zsh-plugins
@@ -94,13 +95,23 @@
               eval "$(direnv hook zsh)"
           when: direnv and update_shell_sources
 
+        - name: Add autocompletion to zsh
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - azure-cli #"
+            content: |
+              autoload -U +X bashcompinit && bashcompinit
+              source /etc/bash_completion.d/azure-cli
+          when: azure_cli and update_shell_sources
+
         - name: Add custom aliases
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
             marker: "# {mark} ANSIBLE MANAGED BLOCK - custom_aliases #"
             content: |
-              {{ custom_aliases }}
+              {{ custom_aliases }}
           when: custom_aliases and update_aliases
       when: zsh
 
@@ -151,6 +162,15 @@
               eval "$(direnv hook zsh)"
           when: direnv and update_shell_sources
 
+        - name: Add autocompletion to bash
+          become: no
+          blockinfile:
+            path: "{{ lookup('env','HOME') }}/.bashrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - azure-cli #"
+            content: |
+              source /etc/bash_completion.d/azure-cli
+          when: azure_cli and update_shell_sources
+
         - name: Add custom aliases
           become: no
           blockinfile:
@@ -158,7 +178,7 @@
             path: "{{ lookup('env','HOME') }}/.bash_aliases"
             marker: "# {mark} ANSIBLE MANAGED BLOCK - custom_aliases #"
             content: |
-              {{ custom_aliases }}
+              {{ custom_aliases }}
           when: custom_aliases and update_aliases
       when: not zsh
 
