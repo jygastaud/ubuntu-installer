@@ -118,7 +118,7 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
     * multipass
     * Virtualbox
     * Vagrant
-
+  * pipenv
 * Browsers
   * ✔ Chrome
 
@@ -159,9 +159,9 @@ config file also allows you to define :
 ## Plan
 
 * Add the following tools
+  * remmina (rdp client)
   * [Azure functions cli](https://docs.microsoft.com/fr-fr/azure/azure-functions/functions-run-local?tabs=linux%2Ccsharp%2Cbash#v2)
   * inkscape
-  * vokoscreen
   * [asdf](https://asdf-vm.com/)
   * terraform
   * confluent cloud (ccloud)

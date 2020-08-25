@@ -419,6 +419,10 @@ packages:
     install: "{{ vokoscreen }}"
     install_with: snap
 
+  - name: pipenv
+    install: "{{ pipenv }}"
+    install_with: apt
+
   ## Cloud / Kubernetes Related
   - name: aws-cli
     classic: yes
