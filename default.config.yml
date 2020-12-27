@@ -34,6 +34,7 @@ bat: yes
 direnv: yes
 # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
 httpie: yes 
+java: no
 # [JQ - Json Processor](https://github.com/stedolan/jq)
 jq: yes
 # [Mosh - Mobile Shell](https://mosh.org/)
@@ -79,7 +80,7 @@ docker_users:
   - "{{ ansible_ssh_user }}"
 docker_install_compose: true
 # temporary fix until focal release is available.
-docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} bionic {{ docker_apt_release_channel }}"
+#docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} bionic {{ docker_apt_release_channel }}"
 
 aws_cli: no
 kubectl: no
@@ -129,6 +130,7 @@ expect: no
 xsel: yes
 svn: no
 traceroute: no
+pipenv: no
 
 # [Postman](https://www.getpostman.com/)
 postman: yes
@@ -253,7 +255,7 @@ gitconfig: []
 #         - kubectl
 
 # Update default versions
-docker_compose_version: "1.26.2"
+docker_compose_version: "1.27.4"
 faas_ver: '0.12.8'
 chezmoi_version: "1.8.5"
 footloose_ver: '0.6.3'
