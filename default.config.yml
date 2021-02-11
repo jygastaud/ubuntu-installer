@@ -308,7 +308,7 @@ packages:
     install_with: apt
 
   - name: peco
-    install: yes
+    install: "{{ peco }}"
     install_with: snap
 
   - name: rclone
