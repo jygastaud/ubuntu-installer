@@ -119,6 +119,10 @@ calibre: no
 claat: no
 footloose: no
 
+# Mouse management ###
+solaar: no
+solaar-gnome3: no
+
 # [Insync - Drive for Linux](https://www.insynchq.com)
 insync: no
 mysql_workbench: no
@@ -482,11 +486,11 @@ packages:
 
   ### Mouse management ###
   - name: solaar
-    install: yes
+    install: "{{ solaar }}"
     install_with: apt
 
   - name: solaar-gnome3
-    install: yes
+    install: "{{ solaar-gnome3 }}"
     install_with: apt
 
   ### VPN ###
