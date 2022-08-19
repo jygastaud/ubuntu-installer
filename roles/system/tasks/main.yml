@@ -11,6 +11,12 @@
     - system
     - apt
 
+- set_fact:
+    pip_packages: "{{ packages | selectattr('install_with', 'equalto', 'pip') | list }}"
+  tags:
+    - system
+    - pip
+
 - name: Install packages with snaps
   tags:
     - system
@@ -34,8 +40,30 @@
   tags:
     - system
     - apt
-  apt: pkg={{ item.name }} state=latest
+  apt:
+    pkg: "{{ item.name }}"
+    state: latest
   loop: "{{ apt_packages }}"
   when: 
     - item.install | default(False)
     - item.install_with == 'apt'
+
+- name: Install pip
+  tags:
+    - system
+    - pip
+  apt:
+    pkg: "python3-pip"
+    state: latest
+  when: pip_packages and pip_packages | length > 0
+
+- name: Install packages with PIP
+  tags:
+    - system
+    - pip
+  pip:
+    name: "{{ item.name }}"
+  loop: "{{ pip_packages }}"
+  when:
+    - item.install | default(False)
+    - item.install_with == 'pip'

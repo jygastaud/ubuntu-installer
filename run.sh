@@ -28,18 +28,27 @@ install-ansible-dev() {
   pip install git+https://github.com/ansible/ansible.git@devel
 }
 
+install-dependencies() {
+  local ansiblegalaxy="$(which ansible-galaxy)"
+  local ansibleplaybook="$(which ansible-playbook)"
+
+  if [[ -n "${ansiblegalaxy}" ]] && [[ -n "${ansibleplaybook}" ]]; then
+      echo "---> Get dependencies"
+      # Download galaxy roles
+      ${ansiblegalaxy} install -r requirements.yml --force
+  else
+      error ansible
+  fi
+}
+
 install-tools () {
   local ansiblegalaxy="$(which ansible-galaxy)"
   local ansibleplaybook="$(which ansible-playbook)"
 
-  if [[ ! -z "${ansiblegalaxy}" ]] && [[ ! -z "${ansibleplaybook}" ]]; then
-      echo "---> Get dependencies"
-      # Download galaxy roles
-      ${ansiblegalaxy} install -r requirements.yml --force
-
+  if [[ -n "${ansiblegalaxy}" ]] && [[ -n "${ansibleplaybook}" ]]; then
       echo "---> Install or Update computer - start"
       # Provisionning
-      ${ansibleplaybook} playbook.yml -i hosts --user=$(whoami) --ask-become-pass
+      ${ansibleplaybook} playbook.yml -i hosts --user=$(whoami) -e my_user=$(whoami) --ask-become-pass -vvvv
       echo "---> Install or Update computer - done"
   else
       error ansible
@@ -60,6 +69,7 @@ main() {
     shift
   done
 
+  [ ! "$1" == "--nodeps" ] || install-dependencies
   install-tools
 }
 

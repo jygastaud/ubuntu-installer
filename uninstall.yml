@@ -7,11 +7,6 @@
     - config.yml
   
   tasks:
-    - name: Uninstall tmuxinator
-      gem: name={{ item }} state=absent
-      with_items:
-        - tmuxinator
-
     - name: Uninstall ruby + Gem
       apt: pkg={{ item }} state=absent
       with_items:

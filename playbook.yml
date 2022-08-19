@@ -2,6 +2,7 @@
 - hosts: localhost
   connection: local
   become: yes
+  gather_facts: yes
 
   vars_files:
     - "default.config.yml"
@@ -11,6 +12,7 @@
       include_vars: "{{ item }}"
       with_fileglob:
         - "config.yml"
+      tags: always
 
   roles:
     - { role: system, tags: [packages] }
@@ -35,6 +37,7 @@
     - { role: others/calibre-ebook, when: calibre, tags: [calibre] }
     - { role: geerlingguy.java, when: java, tags: [java] }
     - { role: dev-tools/azure, when: azure_cli, tags: [azure, azure-cli] }
+    - { role: cimon-io.asdf, when: asdf, tags: [asdf] }
 
   # @todo
   # Install zsh-plugins
@@ -49,17 +52,7 @@
   post_tasks:
     - name: Update .zshrc
       block:
-        - name: Add autocompletion to zsh
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.zshrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - tmuxinator #"
-            content: |
-              source $HOME/.bin/tmuxinator.zsh
-              {{ tmuxinator_alias }}
-          when: tmuxinator and update_shell_sources
-      
-        - name: Add autocompletion to zsh
+        - name: Add autojump support to zsh
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
@@ -86,7 +79,7 @@
                   {{ golang_govars }}
           when: golang and golang_govars and update_shell_sources
 
-        - name: Add autocompletion to zsh
+        - name: Add direnv support to zsh
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
@@ -95,7 +88,7 @@
               eval "$(direnv hook zsh)"
           when: direnv and update_shell_sources
 
-        - name: Add autocompletion to zsh
+        - name: Add azure cli autocompletion to zsh
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
@@ -117,16 +110,7 @@
 
     - name: Update .bashrc
       block:
-        - name: Add autocompletion to bash
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.bashrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - tmuxinator #"
-            content: |
-              source $HOME/.bin/tmuxinator.bash
-          when: tmuxinator and update_shell_sources
-
-        - name: Add autocompletion to bash
+        - name: Add autojump support to bash
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.bashrc"
@@ -153,7 +137,7 @@
                   {{ golang_govars }}
           when: golang and golang_govars and update_shell_sources
 
-        - name: Add autocompletion to bash
+        - name: Add direnv support to bash
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.bashrc"
@@ -162,7 +146,7 @@
               eval "$(direnv hook zsh)"
           when: direnv and update_shell_sources
 
-        - name: Add autocompletion to bash
+        - name: Add azure cli autocompletion to bash
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.bashrc"

@@ -4,7 +4,7 @@
   become: no
   git:
     repo: "{{ item.url }}"
-    dest: "{{ lookup('env','HOME') }}/.oh-my-zsh/custom/themes/{{ item.dest }}"
+    dest: "{{ lookup('env', 'ZSH_CUSTOM') }}/themes/{{ item.dest }}"
     version: "{{ item.version | default('master') }}"
   loop: "{{ zsh_themes | flatten(levels=1) }}"
 

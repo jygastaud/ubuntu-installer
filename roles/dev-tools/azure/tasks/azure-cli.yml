@@ -21,7 +21,7 @@
     - azure
     - azure-cli
 
-- name: Install repo for latest insync packages
+- name: Install repo for latest azure cli packages
   apt_repository:
     repo: 'deb [arch={{ docker_apt_arch }}] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
     state: present

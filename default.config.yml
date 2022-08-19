@@ -32,6 +32,10 @@ autojump: yes
 bat: yes
 # [direnv - Easy management of local environment variables](https://direnv.net/)
 direnv: yes
+# emote - Emoji for the terminal
+emote: no
+# flameshot - Screenshots
+flameshot: no
 # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
 httpie: yes 
 java: no
@@ -46,9 +50,12 @@ pet_cli: no
 # [Rclone - sync files and directories](https://rclone.org/)
 rclone: no
 ruby: no
+slides: no
 syncthing: no
-# [Tmuxinator - Tmux Sessions Manager](https://github.com/tmuxinator/tmuxinator)
-tmuxinator: no
+# tldr - terminal-based documentation reader
+tldr: no
+# Tmuxp - tmux plugin manager
+tmuxp: yes
 # [YQ - Yaml Processor](https://github.com/mikefarah/yq)
 yq: no
 
@@ -63,6 +70,8 @@ lastpass_cli: no
 bitwarden: no
 # [Bitwarden CLI]()
 bitwarden_cli: no
+# [Keepassxc]()
+keepassxc: no
 
 ##### EDITORS #####
 atom: no
@@ -78,14 +87,16 @@ chrome: yes
 docker: yes
 docker_users:
   - "{{ ansible_ssh_user }}"
-docker_install_compose: true
-# temporary fix until focal release is available.
-#docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} bionic {{ docker_apt_release_channel }}"
+# Docker Compose v2
+docker_install_compose_plugin: yes
+# Docker Compose v1
+docker_install_compose: no
 
 aws_cli: no
 kubectl: no
 gcloud: no
 azure_cli: no
+azure_storage_explorer: no
 
 # Download Openshift Client (oc)
 openshift_client: no
@@ -118,15 +129,16 @@ npm: no
 calibre: no
 claat: no
 footloose: no
+gitlabci_local: no
 
 # Mouse management ###
 solaar: no
-solaar-gnome3: no
+solaar_gnome3: no
 
 # [Insync - Drive for Linux](https://www.insynchq.com)
 insync: no
 mysql_workbench: no
-mysql-client: no
+mysql_client: no
 filezilla: no
 
 parallel: yes
@@ -138,16 +150,20 @@ pipenv: no
 
 # [Postman](https://www.getpostman.com/)
 postman: yes
+# Rambox - Instant messaging
+rambox: no
 # [Typora - Markdown Editor](https://typora.io/#linux)
 typora: yes
 spotify: no
 vokoscreen: no
 
+##### GOLANG #####
 golang: no
 go_dev_path: "{{ lookup('env','HOME') }}/go"
 golang_govars: |
   export GOPATH={{ go_dev_path }}
   export PATH=$PATH:${GOPATH}/bin
+goreleaser: no
 
 # GoHugo
 gohugo: no
@@ -207,7 +223,6 @@ custom_aliases: ""
 update_shell_sources: no
 
 ##### Git CONFIG #####
-
 update_gitconfig: no
 
 # Example
@@ -258,11 +273,29 @@ gitconfig: []
 #         - golang
 #         - kubectl
 
-# Update default versions
-docker_compose_version: "1.27.4"
-faas_ver: '0.12.8'
-chezmoi_version: "1.8.5"
-footloose_ver: '0.6.3'
+##### ASDF Config #####
+asdf: yes
+asdf_user: "{{ my_user }}"
+#asdf_plugins:
+#  - name: "awscli"
+#    version:
+#      - latest
+#    global: latest
+#  - name: "buildpack"
+#  - name: "conftest"
+#  - name: "dagger"
+#    repository: "https://github.com/jygastaud/asdf-dagger.git"
+#  - name: "fzf"
+#  - name: "gomplate"
+#  - name: "k3d"
+#  - name: "kind"
+#  - name: "kubectl"
+#  - name: "pluto"
+#  - name: "terraform"
+#  - name: "terragrunt"
+#  - name: "vagrant"
+#  - name: "vault"
+#asdf_legacy_version_file: "yes"
 
 #### ╔╦╗╔═╗  ╔╗╔╔═╗╔╦╗  ╔═╗╦ ╦╔═╗╔╗╔╔═╗╔═╗  ╦ ╦╔╗╔╦  ╔═╗╔═╗╔═╗  ####
 ####  ║║║ ║  ║║║║ ║ ║   ║  ╠═╣╠═╣║║║║ ╦║╣   ║ ║║║║║  ║╣ ╚═╗╚═╗  ####
@@ -327,10 +360,6 @@ packages:
 
   - name: tmux
     install: "{{ tmux }}"
-    install_with: apt
-
-  - name: tmuxinator
-    install: "{{ tmuxinator }}"
     install_with: apt
 
   - name: tree
@@ -416,17 +445,16 @@ packages:
     install: "{{ expect }}"
     install_with: apt
 
+  - name: mysql-client
+    install: "{{ mysql_client }}"
+    install_with: apt
+
   - name: subversion
     install: "{{ svn }}"
     install_with: apt
 
-  - name: vokoscreen-ng
-    classic: yes
-    install: "{{ vokoscreen }}"
-    install_with: snap
-
-  - name: pipenv
-    install: "{{ pipenv }}"
+  - name: tldr
+    install: "{{ tldr }}"
     install_with: apt
 
   ## Cloud / Kubernetes Related
@@ -466,6 +494,27 @@ packages:
     install: "{{ kontenalens }}"
     install_with: snap
 
+  - name: storage-explorer
+    install: "{{ azure_storage_explorer }}"
+    install_with: snap
+
+  - name: slides
+    install: "{{ slides }}"
+    install_with: snap
+
+  - name: goreleaser
+    classic: yes
+    install: "{{ goreleaser }}"
+    install_with: snap
+
+  - name: flameshot
+    install: "{{ flameshot }}"
+    install_with: snap
+
+  - name: emote
+    install: "{{ emote }}"
+    install_with: snap
+
   ### PASSWORD MANAGERS ###
   - name: lastpass-cli
     install: "{{ lastpass_cli }}"
@@ -479,9 +528,22 @@ packages:
     install: "{{ bitwarden_cli }}"
     install_with: snap
 
+  - name: keepassxc
+    install: "{{ keepassxc }}"
+    install_with: snap
+
   ### Entertainment ###
   - name: spotify
     install: "{{ spotify }}"
+    install_with: snap
+
+  - name: rambox
+    install: "{{ rambox }}"
+    install_with: snap
+
+  - name: vokoscreen-ng
+    classic: yes
+    install: "{{ vokoscreen }}"
     install_with: snap
 
   ### Mouse management ###
@@ -490,7 +552,7 @@ packages:
     install_with: apt
 
   - name: solaar-gnome3
-    install: "{{ solaar-gnome3 }}"
+    install: "{{ solaar_gnome3 }}"
     install_with: apt
 
   ### VPN ###
@@ -501,3 +563,15 @@ packages:
   - name: network-manager-openvpn
     install: "{{ openvpn }}"
     install_with: apt
+
+  - name: gitlabci-local
+    install: "{{ gitlabci_local }}"
+    install_with: pip
+
+  - name: pipenv
+    install: "{{ pipenv }}"
+    install_with: pip
+
+  - name: tmuxp
+    install: "{{ tmuxp }}"
+    install_with: pip

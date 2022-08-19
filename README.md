@@ -1,6 +1,16 @@
 # ubuntu-installer
 
-Easily install and configure your Ubuntu 18.04 Desktop installation.
+Easily install and configure your Ubuntu Desktop installation.
+
+## Compatibility Grid
+
+|  Release  |     Status     |  Branch to use  |
+|:---------:|:--------------:|:---------------:|
+|   22.04   |    Unstable    |      main       |
+|   22.04   |     Stable     |      22.04      |
+|   20.04   |  Unmaintained  |      20.04      |
+|   18.04   |  Unmaintained  |      18.04      |
+
 
 ## Requirements
 
@@ -45,19 +55,19 @@ Examples:
 * Install only packages
 
 ```
-ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag packages
+ansible-playbook playbook.yml -i hosts --user=$(whoami) -e "my_user=$(whoami)" --ask-become-pass --tag packages
 ```
 
 * Install only git
 
 ```
-ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag git
+ansible-playbook playbook.yml -i hosts --user=$(whoami) -e "my_user=$(whoami)" --ask-become-pass --tag git
 ```
 
 * Install all `dev-tools`
 
 ```
-ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag dev-tools
+ansible-playbook playbook.yml -i hosts --user=$(whoami) -e "my_user=$(whoami)" --ask-become-pass --tag dev-tools
 ```
 
 **Notes: Tags are not be available for every tools.** 
@@ -86,6 +96,7 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
     * ruby
     * syncthing
     * ✔ tmux
+    * tmuxp
     * traceroute
     * ✔ tree
     * [YQ - Yaml Processor](https://github.com/mikefarah/yq)
@@ -113,16 +124,20 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
   * Nodejs + npm
   * Virtualisation
     * ✔ Docker (with official repository)
-    * ✔ Docker Compose
+    * ✔ Docker Compose (v2)
+    * Docker Compose (v1)
     * footloose
     * multipass
     * Virtualbox
     * Vagrant
   * pipenv
-* Browsers
-  * ✔ Chrome
+  * gitlabci-local
+  * asdf (with asdf you can install many tools such as terraform, terragrunt, dagger etc…)
+  * tldr
 
-*Firefox is not installed here as it is include even in minial installation of Ubuntu.*
+* Browsers
+  * ✔ Chrome (via snap package)
+  * *Firefox is not installed here as it is include even in minial installation of Ubuntu.*
 
 * Shell
   * ✔ Zsh & Oh-My-Zsh
@@ -140,13 +155,16 @@ ansible-playbook playbook.yml -i hosts --user=$(whoami) --ask-become-pass --tag 
   * FileZilla
   * InSync - Google Drive Synchro
   * [Pet - snippet manager](https://github.com/knqyf263/pet)
-  * ✔ Typora - Markdown Editor
+  * [Rambox](https://rambox.pro/)
   * Spotify
+  * ✔ Typora - Markdown Editor
+  * Vokoscreen
 
 * Password managers
   * [LastPass CLI](https://www.lastpass.com)
   * [Bitwarden Desktop](https://bitwarden.com/)
   * [Bitwarden CLI](https://bitwarden.com/help/article/cli/)
+  * [Keepassxc](https://keepassxc.org/)
 
 ## Others options available
 
@@ -162,8 +180,6 @@ config file also allows you to define :
   * remmina (rdp client)
   * [Azure functions cli](https://docs.microsoft.com/fr-fr/azure/azure-functions/functions-run-local?tabs=linux%2Ccsharp%2Cbash#v2)
   * inkscape
-  * [asdf](https://asdf-vm.com/)
-  * terraform
   * confluent cloud (ccloud)
   * hugo (without snap)
   * jungledisk / junglediskcli
@@ -171,15 +187,10 @@ config file also allows you to define :
   * okteto
   * lab
   * protonvpn / protonvpncli (pip)
-  * tldr
-  * fzf
   * zoom
   * xclip
   * pip
     * diagrams
-    * gitlabci-local
-    * pipenv
-    * tmuxp
     * blastraduius
     * ansible-autodoc
 * process
