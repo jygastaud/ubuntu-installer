@@ -52,6 +52,14 @@
   post_tasks:
     - name: Update .zshrc
       block:
+        - name: Add tmux autostart support to zsh
+          become: no
+          lineinfile:
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            insertafter: "source $ZSH/oh-my-zsh.sh"
+            line: "ZSH_TMUX_AUTOSTART=true"
+          when: tmux and tmux_autostart
+
         - name: Add autojump support to zsh
           become: no
           blockinfile:
@@ -107,9 +115,19 @@
               {{ custom_aliases }}
           when: custom_aliases and update_aliases
       when: zsh
+      tags: [shell]
 
     - name: Update .bashrc
       block:
+        - name: Add tmux autostart support to bash
+          become: no
+          lineinfile:
+            path: "{{ lookup('env','HOME') }}/.bashrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK - tmux autostart #"
+            insertafter: "source $ZSH/oh-my-zsh.sh"
+            line: "ZSH_TMUX_AUTOSTART=true"
+          when: tmux and tmux_autostart
+
         - name: Add autojump support to bash
           become: no
           blockinfile:
@@ -165,6 +183,7 @@
               {{ custom_aliases }}
           when: custom_aliases and update_aliases
       when: not zsh
+      tags: [shell]
 
     - name: Create / Update gitconfig files
       become: no

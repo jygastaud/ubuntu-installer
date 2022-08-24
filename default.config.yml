@@ -26,6 +26,8 @@ tree: yes
 
 # [asciinema - Record terminal sesions](https://asciinema.org/)
 asciinema: no
+# [at - Schedule commands to run at a specific time](https://man7.org/linux/man-pages/man1/at.1p.html)
+at: yes
 # [autojump - better cd](https://github.com/wting/autojump)
 autojump: yes
 # [Cat clone](https://github.com/sharkdp/bat)
@@ -34,6 +36,10 @@ bat: yes
 direnv: yes
 # emote - Emoji for the terminal
 emote: no
+# Entr - Run arbitrary commands when files change
+entr: no
+# fd - A simple, fast and user-friendly alternative to find
+fd: yes
 # flameshot - Screenshots
 flameshot: no
 # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
@@ -51,6 +57,7 @@ pet_cli: no
 rclone: no
 ruby: no
 slides: no
+sshpass: yes
 syncthing: no
 # tldr - terminal-based documentation reader
 tldr: no
@@ -72,6 +79,8 @@ bitwarden: no
 bitwarden_cli: no
 # [Keepassxc]()
 keepassxc: no
+# [Pass](https://www.passwordstore.org/)
+pass: yes
 
 ##### EDITORS #####
 atom: no
@@ -312,6 +321,10 @@ packages:
     install: "{{ asciinema }}"
     install_with: snap
 
+  - name: at
+    install: "{{ at }}"
+    install_with: apt
+
   - name: autojump
     install: "{{ autojump }}"
     install_with: apt
@@ -322,6 +335,14 @@ packages:
 
   - name: direnv
     install: "{{ direnv }}"
+    install_with: apt
+
+  - name: entr
+    install: "{{ entr }}"
+    install_with: apt
+
+  - name: fd-find
+    install: "{{ fd }}"
     install_with: apt
 
   - name: htop
@@ -338,6 +359,10 @@ packages:
 
   - name: mosh
     install: "{{ mosh }}"
+    install_with: apt
+
+  - name: pass
+    install: "{{ pass }}"
     install_with: apt
 
   - name: peco
@@ -360,6 +385,10 @@ packages:
 
   - name: tmux
     install: "{{ tmux }}"
+    install_with: apt
+
+  - name: sshpass
+    install: "{{ sshpass }}"
     install_with: apt
 
   - name: tree
@@ -564,6 +593,7 @@ packages:
     install: "{{ openvpn }}"
     install_with: apt
 
+  ### PIP tools ###
   - name: gitlabci-local
     install: "{{ gitlabci_local }}"
     install_with: pip

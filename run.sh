@@ -69,7 +69,7 @@ main() {
     shift
   done
 
-  [ ! "$1" == "--nodeps" ] || install-dependencies
+  install-dependencies
   install-tools
 }
 

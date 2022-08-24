@@ -28,3 +28,8 @@
 * mysql client
 * rambox
 * goreleaser
+* fd
+* at
+* pass
+* entr
+* sshpass

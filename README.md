@@ -4,13 +4,13 @@ Easily install and configure your Ubuntu Desktop installation.
 
 ## Compatibility Grid
 
-|  Release  |     Status     |  Branch to use  |
-|:---------:|:--------------:|:---------------:|
-|   22.04   |    Unstable    |      main       |
-|   22.04   |     Stable     |      22.04      |
-|   20.04   |  Unmaintained  |      20.04      |
-|   18.04   |  Unmaintained  |      18.04      |
-
+| Release |     Status     | Branch to use |
+|:-------:|:--------------:|:-------------:|
+|  22.04  |    Unstable    |     main      |
+|  22.04  |     Stable     |     22.04     |
+|  20.04  |  Unmaintained  |     20.04     |
+|  18.04  |  Unmaintained  |     18.04     |
+|  16.04  |  Unmaintained  |     16.04     |
 
 ## Requirements
 
@@ -177,12 +177,24 @@ config file also allows you to define :
 ## Plan
 
 * Add the following tools
+  * Barrier
+  * Clockify
+  * anchore/grype
+  * Trivy
+  * infrahq
+  * openlens
   * remmina (rdp client)
+  * apache2-utils
+  * asciidoc
+  * flatpack
+  * shellcheck
+  * touchgg https://github.com/JoseExposito/touchegg
+  * neovim
   * [Azure functions cli](https://docs.microsoft.com/fr-fr/azure/azure-functions/functions-run-local?tabs=linux%2Ccsharp%2Cbash#v2)
   * inkscape
   * confluent cloud (ccloud)
   * hugo (without snap)
-  * jungledisk / junglediskcli
+  * jungledisk / junglediskcli (https://downloads.jungledisk.com/current/junglediskdesktop_amd64.deb)
   * kompose
   * okteto
   * lab
@@ -193,6 +205,9 @@ config file also allows you to define :
     * diagrams
     * blastraduius
     * ansible-autodoc
+  * VLC
+  * wireguard
+  * xdg-utils
 * process
   * activate/configure vscode plugins
   * activate/configure phpstorm plugins
