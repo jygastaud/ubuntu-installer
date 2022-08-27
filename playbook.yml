@@ -55,18 +55,41 @@
           become: no
           lineinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
-            insertafter: "source $ZSH/oh-my-zsh.sh"
+            insertbefore: 'source \$ZSH\/oh\-my\-zsh\.sh'
             line: "ZSH_TMUX_AUTOSTART=true"
           when: tmux and tmux_autostart
 
-        - name: Add autojump support to zsh
+        - name: Update shell sources for zsh
           become: no
           blockinfile:
             path: "{{ lookup('env','HOME') }}/.zshrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump #"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK #"
             content: |
+              {% if autojump is sameas true %}
               source /usr/share/autojump/autojump.sh
-          when: autojump and update_shell_sources
+              {% endif %}
+              
+              {% if direnv is sameas true %}
+              eval "$(direnv hook zsh)"
+              {% endif %}
+
+              {% if azure_cli is sameas true %}
+              autoload -U +X bashcompinit && bashcompinit
+              source /etc/bash_completion.d/azure-cli
+              {% endif %}
+              
+              {% if direnv is sameas true %}
+              eval "$(direnv hook zsh)"
+              {% endif %}
+              
+              {% if custom_aliases is defined and custom_aliases|length > 0 %}
+              {{ custom_aliases }}
+              {% endif %}
+
+              {% if custom_shell_sources is defined and custom_shell_sources|length > 0%}
+              {{ custom_shell_sources }}
+              {% endif %}
+          when: update_shell_sources
 
         - name: Add GOPATH and GOBIN
           become: no
@@ -85,56 +108,42 @@
                 content: |
                   {{ golang_govars }}
           when: golang and golang_govars and update_shell_sources
-
-        - name: Add direnv support to zsh
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.zshrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - direnv #"
-            content: |
-              eval "$(direnv hook zsh)"
-          when: direnv and update_shell_sources
-
-        - name: Add azure cli autocompletion to zsh
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.zshrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - azure-cli #"
-            content: |
-              autoload -U +X bashcompinit && bashcompinit
-              source /etc/bash_completion.d/azure-cli
-          when: azure_cli and update_shell_sources
-
-        - name: Add custom aliases
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.zshrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - custom_aliases #"
-            content: |
-              {{ custom_aliases }}
-          when: custom_aliases and update_aliases
       when: zsh
       tags: [shell]
 
     - name: Update .bashrc
       block:
-        - name: Add tmux autostart support to bash
-          become: no
-          lineinfile:
-            path: "{{ lookup('env','HOME') }}/.bashrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - tmux autostart #"
-            insertafter: "source $ZSH/oh-my-zsh.sh"
-            line: "ZSH_TMUX_AUTOSTART=true"
-          when: tmux and tmux_autostart
-
-        - name: Add autojump support to bash
+        - name: Update shell sources for bash
           become: no
           blockinfile:
-            path: "{{ lookup('env','HOME') }}/.bashrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - autojump #"
+            path: "{{ lookup('env','HOME') }}/.zshrc"
+            marker: "# {mark} ANSIBLE MANAGED BLOCK #"
             content: |
+              {% if autojump is sameas true %}
               source /usr/share/autojump/autojump.sh
-          when: autojump and update_shell_sources
+              {% endif %}
+              
+              {% if direnv is sameas true %}
+              eval "$(direnv hook zsh)"
+              {% endif %}
+
+              {% if azure_cli is sameas true %}
+              autoload -U +X bashcompinit && bashcompinit
+              source /etc/bash_completion.d/azure-cli
+              {% endif %}
+              
+              {% if direnv is sameas true %}
+              eval "$(direnv hook zsh)"
+              {% endif %}
+              
+              {% if custom_aliases is defined and custom_aliases|length > 0 %}
+              {{ custom_aliases }}
+              {% endif %}
+
+              {% if custom_shell_sources is defined and custom_shell_sources|length > 0%}
+              {{ custom_shell_sources }}
+              {% endif %}
+          when: update_shell_sources
 
         - name: Add GOPATH and GOBIN
           become: no
@@ -153,34 +162,6 @@
                 content: |
                   {{ golang_govars }}
           when: golang and golang_govars and update_shell_sources
-
-        - name: Add direnv support to bash
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.bashrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - direnv #"
-            content: |
-              eval "$(direnv hook zsh)"
-          when: direnv and update_shell_sources
-
-        - name: Add azure cli autocompletion to bash
-          become: no
-          blockinfile:
-            path: "{{ lookup('env','HOME') }}/.bashrc"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - azure-cli #"
-            content: |
-              source /etc/bash_completion.d/azure-cli
-          when: azure_cli and update_shell_sources
-
-        - name: Add custom aliases
-          become: no
-          blockinfile:
-            create: yes
-            path: "{{ lookup('env','HOME') }}/.bash_aliases"
-            marker: "# {mark} ANSIBLE MANAGED BLOCK - custom_aliases #"
-            content: |
-              {{ custom_aliases }}
-          when: custom_aliases and update_aliases
       when: not zsh
       tags: [shell]
 
