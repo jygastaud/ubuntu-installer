@@ -1,2 +1,9 @@
 ---
 # Tasks to install zsh plugins
+- name: Download zsh-plugins
+  become: no
+  git:
+    repo: "{{ item.url }}"
+    dest: "{{ lookup('env','HOME') }}/.oh-my-zsh/custom/plugins/{{ item.dest }}"
+    version: "{{ item.version | default('master') }}"
+  loop: "{{ zsh_plugins | flatten(levels=1) }}"

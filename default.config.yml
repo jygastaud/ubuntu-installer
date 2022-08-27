@@ -285,6 +285,7 @@ gitconfig: []
 ##### ASDF Config #####
 asdf: yes
 asdf_user: "{{ my_user }}"
+asdf_group: "{{ my_user }}"
 #asdf_plugins:
 #  - name: "awscli"
 #    version:
