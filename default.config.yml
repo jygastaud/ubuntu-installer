@@ -43,7 +43,7 @@ fd: yes
 # flameshot - Screenshots
 flameshot: no
 # [httpie - HTTP Client](https://github.com/jakubroztocil/httpie)
-httpie: yes 
+httpie: yes
 java: no
 # [JQ - Json Processor](https://github.com/stedolan/jq)
 jq: yes
@@ -120,7 +120,7 @@ helm: no
 faas: no
 
 # Kontena Lens
-kontenalens: no
+kontena_lens: no
 
 # Multipass
 multipass: no
@@ -257,7 +257,7 @@ update_gitconfig: no
 #     value: |
 #       [user]
 #         email = myother@email.com
-#     
+#
 #       [core]
 #         editor = "code -w"
 gitconfig: []
@@ -449,7 +449,7 @@ packages:
   - name: postman
     install: "{{ postman }}"
     install_with: snap
-  
+
   - name: filezilla
     install: "{{ filezilla }}"
     install_with: apt
@@ -494,10 +494,10 @@ packages:
     install_with: snap
 
   - name: kubectl
-    classic: yes  
+    classic: yes
     install: "{{ kubectl }}"
     install_with: snap
-  
+
   - name: microk8s
     classic: yes
     channel: edge
@@ -513,7 +513,7 @@ packages:
     classic: yes
     install: "{{ gcloud }}"
     install_with: snap
-  
+
   - name: multipass
     classic: yes
     install: "{{ multipass }}"
@@ -521,7 +521,7 @@ packages:
 
   - name: kontena-lens
     classic: yes
-    install: "{{ kontenalens }}"
+    install: "{{ kontena_lens }}"
     install_with: snap
 
   - name: storage-explorer

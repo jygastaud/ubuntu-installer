@@ -11,6 +11,7 @@
       include_vars: "{{ item }}"
       with_fileglob:
         - "config.yml"
+        - "{{ config_file | default('') }}"
       tags: always
 
   roles:
