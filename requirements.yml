@@ -3,9 +3,9 @@ collections:
 
 roles:
 - src: gantsign.oh-my-zsh
-  version: "2.4.0"
+  version: "2.7.0"
 - src: oefenweb.chrome
-  version: "v1.0.43"
+  version: "v1.0.45"
 - src: oefenweb.virtualbox
 - src: oefenweb.vagrant
 - src: geerlingguy.docker
